@@ -1,0 +1,37 @@
+class Solution {
+    public String simplifyPath(String path) {
+        
+        String canonical = "";
+        List<String> directories = new ArrayList<String>();
+        
+        if (path.length() == 1) {
+            return "/";
+        }
+        
+        String[] pathArr = path.split("/");
+                                      
+        for (int i = 0; i < pathArr.length; i++) {
+            if (pathArr[i].length() == 0) {
+                pathArr[i] = "";
+            } else if (pathArr[i].equals(".")) {
+                pathArr[i] = "";
+            } else if (pathArr[i].equals("..")) {
+                if (directories.size() > 0) {
+                    directories.remove(directories.size()-1);
+                }
+            } else {
+                directories.add(pathArr[i]);
+            }
+        }
+        
+        for (String s: directories) {
+            canonical += "/" + s;
+        }
+
+        if (canonical.length() <= 1) {
+            return "/";
+        }
+        
+        return canonical;
+    }
+}
