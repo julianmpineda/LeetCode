@@ -1,0 +1,27 @@
+class Solution {
+    public boolean isIsomorphic(String s, String t) {
+        
+        if (s.length() != t.length()) {
+            return false;
+        }
+        
+        HashMap<Character, Character> iso = new HashMap<>(); 
+        
+        for (int i = 0; i < s.length(); i++) {
+            
+            //to reduce the amount of parenthesis and make it easier to read
+            char schar = s.charAt(i);
+            char tchar = t.charAt(i);
+            
+            System.out.println(schar + ", " + tchar);
+            
+            if (!iso.containsKey(schar) && !iso.containsValue(tchar)) {
+                iso.put(schar, tchar);
+            } else if (iso.get(schar) == null || iso.get(schar) != tchar) {
+                return false;
+            } 
+        }
+        
+        return true;
+    }
+}
