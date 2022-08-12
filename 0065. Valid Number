@@ -1,0 +1,100 @@
+class Solution {
+    public boolean isNumber(String s) {
+        
+        int len = s.length();
+        boolean dot = false;
+        boolean twoLetters = false;
+        
+        //Sign is either implied or removed if in the correct location.
+        boolean sign = true;
+        
+        if (len == 1) {
+            return Character.isDigit(s.charAt(0));
+        }
+        
+        //remove leading +-, only valid position for starting sign
+        if (s.charAt(0) == '+' || s.charAt(0) == '-') {
+            s = s.substring(1);
+            len--;
+        }
+        
+        //remove leading .
+        if (s.charAt(0) == '.') {
+            dot = true;
+            s = s.substring(1);
+            len--;
+        }
+        
+        if (len == 0) {
+            return false;
+        }
+        
+        //Initial testing in decreasing order of invalidity
+        
+        //Check to see if beginning is a letter and ending is not a digit or '.'
+        if (!Character.isDigit(s.charAt(0)) && s.charAt(0) != '.') {
+            System.out.println("Invalid beginning");
+            return false;
+        }
+        
+        if (!Character.isDigit(s.charAt(len-1)) && s.charAt(len-1) != '.') {
+            System.out.println("Invalid end");
+            return false;
+        }
+        
+        
+        //Test for invalid letters
+        String test = s.replaceAll("[0-9\\+\\-eE\\.]", "");
+        System.out.println("testChar = \"" + test + "\"");
+        if (test.length() != 0) {
+            System.out.println("Invalid letters");
+            return false;  
+        }
+        
+        //check to make sure symbols are unique (signs, e, decimals), and correctly placed
+        //ignore any digits, and has already been screened for letters.
+        
+        for (int i = 0; i < len; i++) {
+            System.out.print(s.charAt(i));
+                
+            if (s.charAt(i) == 'e' || s.charAt(i) == 'E') {
+                if (!twoLetters) {
+                    twoLetters = true;
+                    sign = false;
+                } else {
+                    System.out.println("extra Ee");
+                    return false;
+                }
+            }
+            
+            if (s.charAt(i) == '+' || s.charAt(i) == '-') {
+                if  (sign) {
+                    System.out.println("extra +-");
+                    return false;
+                } else if (twoLetters) {
+                    if (s.charAt(i-1) == 'E' || s.charAt(i-1) == 'e') {
+                        //do nothing, is correct
+                    } else {
+                        System.out.println("+- in wrong place");
+                        return false;
+                    }
+                } else {
+                    sign = true;
+                }
+            }
+            
+            //Check if there is a decimal afer any e
+            
+            if (s.charAt(i) == '.') {
+                if (!dot && !twoLetters) {
+                    dot = true;
+                } else {
+                    System.out.println("extra decimal");
+                    return false;
+                }
+            }
+        }
+        
+        return true;
+    }
+}
