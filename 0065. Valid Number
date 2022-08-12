@@ -42,27 +42,22 @@ class Solution {
             return false;
         }
         
-        
-        //Test for invalid letters
-        String test = s.replaceAll("[0-9\\+\\-eE\\.]", "");
-        System.out.println("testChar = \"" + test + "\"");
-        if (test.length() != 0) {
-            System.out.println("Invalid letters");
-            return false;  
-        }
-        
         //check to make sure symbols are unique (signs, e, decimals), and correctly placed
         //ignore any digits, and has already been screened for letters.
         
         for (int i = 0; i < len; i++) {
             System.out.print(s.charAt(i));
                 
-            if (s.charAt(i) == 'e' || s.charAt(i) == 'E') {
-                if (!twoLetters) {
-                    twoLetters = true;
-                    sign = false;
+            if (Character.isLetter(s.charAt(i))) {    
+                if (s.charAt(i) == 'e' || s.charAt(i) == 'E') {
+                    if (!twoLetters) {
+                        twoLetters = true;
+                        sign = false;
+                    } else {
+                        System.out.println("extra Ee");
+                        return false;
+                    }
                 } else {
-                    System.out.println("extra Ee");
                     return false;
                 }
             }
