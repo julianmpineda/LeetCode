@@ -1,0 +1,24 @@
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        int[] salpha = new int[26];
+        int[] talpha = new int[26];
+
+        if (s.length() != t.length()) {
+            return false;
+        }
+
+        for (int i = 0; i < s.length(); i++) {
+            salpha[s.charAt(i)-'a']++;
+            talpha[t.charAt(i)-'a']++;
+        }
+
+        int count = 0;
+        while (count < 26) {
+            if (salpha[count] != talpha[count]) {
+                return false;
+            }
+            count++;
+        }
+        return true;
+    }
+}
