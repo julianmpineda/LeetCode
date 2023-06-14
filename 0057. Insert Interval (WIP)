@@ -1,0 +1,94 @@
+class Solution {
+    public int[][] insert(int[][] intervals, int[] newInterval) {
+        List<int[]> mergedIntervals = new ArrayList<int[]>();
+        int start = 0, end = 0, count = 0;
+        int overlap = 0;
+        boolean added = false;
+        int[] temp = new int[]{Integer.MAX_VALUE,Integer.MIN_VALUE};
+
+        if (intervals.length == 0) {
+            return new int[][]{newInterval};
+        }
+
+        /* determine case:
+            Case 0: Interval overlaps none
+            Case 1: Interval overlaps 1
+            Case 2: Interval overlaps multiple
+            
+            Find:
+            what to insert
+            where to insert (1)
+            how many to skip (2, 3)
+        */
+
+        for (int i = 0; i < intervals.length; i++) {
+            if (newInterval[0] >= intervals[i][0] && newInterval[0] <= intervals[i][1]) {
+                temp[0] = Math.min(intervals[i][0], newInterval[0]);
+                start = i;
+                overlap++;
+            }
+            if (newInterval[1] >= intervals[i][0] && newInterval[1] <= intervals[i][1]) {
+                temp[1] = Math.max(intervals[i][1], newInterval[1]);
+                end = i;
+                overlap++;
+            }
+        }
+
+        if (overlap == 0) {
+            temp = newInterval;
+        } else if (overlap == 1) {
+            temp[0] = Math.min(temp[0], newInterval[0]);
+            temp[1] = Math.max(temp[1], newInterval[1]);
+            start = Math.max(start, end);
+            end = start;
+        }
+
+        for (int j = 0; j < intervals.length; j++) {
+            switch(overlap) {
+                case 0:
+                    if (temp[0] < intervals[j][0] && !added) {
+                        mergedIntervals.add(temp);
+                        mergedIntervals.add(intervals[j]); 
+                        added = true; 
+                    } else {
+                        mergedIntervals.add(intervals[j]); 
+                    }
+                    if (j+1 == intervals.length && !added) {
+                        mergedIntervals.add(temp);
+                    }
+                    break;
+                case 1:
+                    if (j < start || j > end) {
+                        mergedIntervals.add(intervals[j]);
+                    } else {
+                        mergedIntervals.add(temp);
+                        j += end;
+                    }
+                    break;
+                case 2:
+                    if (j < start || j > end) {
+                        mergedIntervals.add(intervals[j]);
+                    } else {
+                        mergedIntervals.add(temp);
+                        j = end;
+                    }
+                    break;
+            }
+        }
+
+        for (int[] x : mergedIntervals) {
+            System.out.println(x[0] + ", " + x[1]);
+        }
+
+        int[][] returnIntervals = new int[mergedIntervals.size()][2];
+
+        for (int k = 0; k < mergedIntervals.size(); k++) {
+            returnIntervals[k] = mergedIntervals.get(k);
+        }
+
+        System.out.println("Temp: " + temp[0] + ", " + temp[1]);
+        System.out.println("Start: " + start + ", End: " + end);
+        System.out.println("overlap: " + overlap);
+        return returnIntervals;
+    }
+} 
