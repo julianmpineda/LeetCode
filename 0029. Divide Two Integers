@@ -1,0 +1,34 @@
+class Solution {
+    public int divide(int dividend, int divisor) {
+        int quotient = 0, sign = 1;
+        int remainder = Math.abs(dividend);
+        
+        if (divisor == 1) {
+            return dividend;
+        } else if (divisor == -1) {
+            if (dividend == Integer.MIN_VALUE) {
+                return Integer.MAX_VALUE;
+            }
+            return dividend*-1;
+        } else if (divisor == Integer.MIN_VALUE) {
+            return 0;
+        }
+
+        if (divisor < 0 ^ dividend < 0) {
+            sign = -1;
+        }
+        
+        while (remainder >= Math.abs(divisor)) {
+            remainder -= Math.abs(divisor);
+            quotient++;
+        }
+
+        if (quotient*sign < Integer.MIN_VALUE) {
+            return Integer.MIN_VALUE;
+        } else if (quotient*sign > Integer.MAX_VALUE) {
+            return Integer.MAX_VALUE;
+        }
+
+        return quotient*sign;
+    }
+}
