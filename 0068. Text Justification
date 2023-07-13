@@ -1,0 +1,133 @@
+class Solution {
+    public List<String> fullJustify(String[] words, int maxWidth) {
+
+        List<String> retString = new ArrayList<String>();
+
+        if (words.length == 1) {
+            
+            String one = words[0];
+            while (one.length() < maxWidth) {
+                one += " ";
+            }
+            retString.add(one);
+            return retString;
+        }
+
+        List<List<String>> lineWords = new ArrayList<List<String>>();
+        List<String> tempLine = new ArrayList<String>();
+        String line = "";
+        int[] lengths = new int[words.length];
+        int currWidth = 0, count = 0;
+
+        for (int i = 0; i < words.length; i++) {
+            lengths[i] = words[i].length();
+        }
+
+        // create list of words per line.
+        while (count < words.length) {
+            tempLine.add(words[count]);
+            currWidth += words[count].length();
+            count++;
+                
+            if ((count < words.length) && ((words[count].length() + currWidth + 1) <= maxWidth)) {
+                currWidth++;
+            } else {
+                lineWords.add(new ArrayList<String>(tempLine));
+                tempLine.clear();
+                currWidth = 0;
+            }
+        }
+
+        for (int j = 0; j < lineWords.size(); j++) {
+            tempLine = lineWords.get(j);
+
+            if (tempLine.size() == 1 && tempLine.get(0).length() != maxWidth) {
+                String[] temp = new String[2];
+                temp[0] = tempLine.get(0);
+                temp[1] = " ";
+                int spaceCount = maxWidth - temp[0].length() - 1;
+                while (spaceCount > 0) {
+                    temp[1] += " ";
+                    spaceCount--;
+                }
+                retString.add(temp[0] + temp[1]);
+
+            } else if (tempLine.size() == 1 && tempLine.get(0).length() == maxWidth) {
+               retString.add(tempLine.get(0));
+              
+            } else if (tempLine.size() > 1 && j != lineWords.size()-1) {
+                String[] temp = new String[2*tempLine.size() - 1];
+                int kCount = 0;
+                int kWidth = 0;
+
+                for (int k = 0; k < temp.length; k++) {
+                    
+                    if (k % 2 == 0) {
+                        temp[k] = tempLine.get(kCount);
+                        kWidth += tempLine.get(kCount).length();
+                        kCount++;
+                    } else {
+                        temp[k] = "";
+                    }
+                }
+
+                int spaceCount = maxWidth - kWidth;
+                kCount = 1;
+
+                while (spaceCount > 0) {
+                    temp[kCount] += " ";
+                    spaceCount--;
+                    kCount += 2;
+
+                    if (kCount >= temp.length) {
+                        kCount = 1;
+                    }
+                }
+
+                String sTemp = "";
+
+                for (String s : temp) {
+                    sTemp += s;
+                }
+              
+                retString.add(sTemp);
+
+            } else if (tempLine.size() > 1 && j == lineWords.size()-1) {
+                String[] temp = new String[2*tempLine.size()];
+                int kCount = 0;
+                int kWidth = 0;
+
+                for (int k = 0; k < temp.length; k++) {
+                    if (k % 2 == 0) {
+                        temp[k] = tempLine.get(kCount);
+                        kWidth += tempLine.get(kCount).length();
+                        kCount++;
+                    } else {
+                        temp[k] = " ";
+                        kWidth++;
+                    }
+                }
+
+                int spaceCount = maxWidth - kWidth;
+
+                while (spaceCount > 0) {
+                    temp[temp.length-1] += " ";
+                    spaceCount--;
+                }
+
+                String sTemp = "";
+
+                for (String s : temp) {
+                    sTemp += s;
+                }
+                
+                if (sTemp.length() > maxWidth) {
+                    sTemp = sTemp.substring(0, maxWidth);
+                }
+
+                retString.add(sTemp);
+            }
+        }
+        return retString;
+    }
+}
