@@ -1,0 +1,29 @@
+class Solution {
+    public int[] maxSlidingWindow(int[] nums, int k) {
+
+        if (nums.length == 1) {
+            return nums;
+        }
+
+        int start = 0, end = k-1;
+        List<Integer> winMax = new ArrayList<Integer>();
+
+        while (end < nums.length) {
+            int tempMax = Integer.MIN_VALUE;
+            for (int i = start; i <= end; i++) {
+                tempMax = Math.max(nums[i], tempMax);
+            }
+            winMax.add(tempMax);
+            start++;
+            end++;
+        } 
+
+        int[] maxList = new int[winMax.size()];
+
+        for (int j = 0; j < winMax.size(); j++) {
+            maxList[j] = winMax.get(j);
+        }
+
+        return maxList;
+    }
+}
