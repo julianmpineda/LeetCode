@@ -5,15 +5,26 @@ class Solution {
             return nums;
         }
 
-        int start = 0, end = k-1;
+        int start = 0, end = k - 1;
         List<Integer> winMax = new ArrayList<Integer>();
 
+        int[] firstMax = findMax(nums, k, start, end);
+        int tempMax = firstMax[0];
+        int maxInd = firstMax[1];
+
+        //winMax.add(tempMax);
+
         while (end < nums.length) {
-            int tempMax = Integer.MIN_VALUE;
-            for (int i = start; i <= end; i++) {
-                tempMax = Math.max(nums[i], tempMax);
+
+            if (maxInd < start) {
+                int[] tempSave = findMax(nums, k, start, end);
+                tempMax = tempSave[0];
+                maxInd = tempSave[1];
+                winMax.add(tempMax);
+            } else {
+                tempMax = Math.max(Math.max(tempMax, nums[start]), nums[end]);
+                winMax.add(tempMax);
             }
-            winMax.add(tempMax);
             start++;
             end++;
         } 
@@ -25,5 +36,20 @@ class Solution {
         }
 
         return maxList;
+    }
+
+    public static int[] findMax(int[] nums, int k, int start, int end) {
+
+        int maxInd = 0, tempSave = 0, tempMax = Integer.MIN_VALUE;
+
+        for (int i = start; i <= end; i++) {
+            tempSave = tempMax;
+            tempMax = Math.max(nums[i], tempMax);
+            if (tempSave != tempMax) {
+                maxInd = i;
+            }
+        }
+        //System.out.println("New Max is " + tempMax + " with maxInd " + maxInd + "\n");
+        return new int[]{tempMax, maxInd};
     }
 }
