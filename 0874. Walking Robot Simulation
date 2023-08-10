@@ -1,0 +1,73 @@
+class Solution {
+    public int robotSim(int[] commands, int[][] obstacles) {
+        int count = 0;
+        int[] furthest = new int[]{0,0};
+        int[] currPos = new int[]{0,0};
+        // Representing up, right, down, left
+        int currDir = 0;
+        int[][] direction = new int[][]{{0,1},{1,0},{0,-1},{-1,0}};
+
+        while (count < commands.length) {
+            int command = commands[count];
+            if (command == -1) {
+                currDir = (currDir + 1) % 4;
+
+        int currDis = currPos[0]*currPos[0] + currPos[1]*currPos[1];
+        int furDis = furthest[0]*furthest[0] + furthest[1]*furthest[1];
+        if (currDis > furDis) {
+            furthest[0] = currPos[0];
+            furthest[1] = currPos[1];
+        }
+            } else if (command == -2) {
+                currDir -= 1;
+
+        int currDis = currPos[0]*currPos[0] + currPos[1]*currPos[1];
+        int furDis = furthest[0]*furthest[0] + furthest[1]*furthest[1];
+        if (currDis > furDis) {
+            furthest[0] = currPos[0];
+            furthest[1] = currPos[1];
+        }
+
+                if (currDir == -1) {
+                    currDir = 3;
+                }
+            } else {
+                if (obstacles.length == 0){
+                    currPos[0] += direction[currDir][0] * command;
+                    currPos[1] += direction[currDir][1] * command;
+                } else {
+                    for (int i = 0; i < command; i++) {
+                        int x = currPos[0] + direction[currDir][0];
+                        int y = currPos[1] + direction[currDir][1];
+                        if (!checkObstacle(x, y, obstacles)) {
+                            currPos[0] = x;
+                            currPos[1] = y;
+                        }
+                    }
+                }
+            }
+            count++;
+        }
+
+        int currDis = currPos[0]*currPos[0] + currPos[1]*currPos[1];
+        int furDis = furthest[0]*furthest[0] + furthest[1]*furthest[1];
+        if (currDis > furDis) {
+            furthest[0] = currPos[0];
+            furthest[1] = currPos[1];
+        }
+
+        return furthest[0]*furthest[0] + furthest[1]*furthest[1];
+    }
+
+    public boolean checkObstacle(int x, int y, int[][]obstacles) {
+
+        for (int i = 0; i < obstacles.length; i++) {
+            if (obstacles[i][0] == x) {
+                if (obstacles[i][1] == y) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+}
