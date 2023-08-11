@@ -1,0 +1,24 @@
+class Solution {
+    public int hIndex(int[] citations) {
+        int count = 0, floor = 0;
+
+        //Sort Array in descending order. Defined range means no overflow problems.
+
+        for (int i = 0; i < citations.length; i++) {
+            citations[i] *= -1;
+        }
+
+        Arrays.sort(citations);
+
+        for (int j = 0; j < citations.length; j++) {
+            citations[j] *= -1;
+        }
+
+        while (count < citations.length && citations[count] > floor) {
+            count++;
+            floor++;
+        }
+
+        return floor;
+    }
+}
