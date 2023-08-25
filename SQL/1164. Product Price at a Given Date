@@ -1,0 +1,14 @@
+# Write your MySQL query statement below
+WITH aug_16 AS (
+    SELECT product_id, new_price AS price, 
+        RANK() OVER(PARTITION BY product_id ORDER BY change_date DESC) price_rank
+    FROM Products
+    WHERE change_date <= '2019-08-16' 
+)
+
+SELECT A.product_id, COALESCE(B.price, 10) AS price
+FROM Products A
+LEFT JOIN aug_16 B
+ON A.product_id = B.product_id
+WHERE B.price_rank = 1 OR B.price_rank IS NULL
+GROUP BY A.product_id
