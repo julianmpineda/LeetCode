@@ -1,0 +1,19 @@
+# Write your MySQL query statement below
+WITH sell_prices AS
+    (SELECT stock_name, SUM(price) AS sell_price
+    FROM Stocks 
+    WHERE operation = 'sell'
+    GROUP BY stock_name
+    ),
+buy_prices AS
+    (SELECT stock_name, SUM(price) AS buy_price
+    FROM Stocks 
+    WHERE operation = 'buy'
+    GROUP BY stock_name
+    )
+
+SELECT A.stock_name, (SUM(A.sell_price) - SUM(B.buy_price)) AS capital_gain_loss
+FROM sell_prices A
+JOIN buy_prices B
+ON A.stock_name = B.stock_name
+GROUP BY stock_name
