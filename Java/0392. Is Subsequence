@@ -1,0 +1,20 @@
+class Solution {
+    public boolean isSubsequence(String s, String t) {
+        int sRun = 0, tRun = 0;
+
+        if (t.length() < s.length()) {
+            return false;
+        }
+        
+        while (sRun < s.length() && tRun < t.length()) {
+            if (s.charAt(sRun) == t.charAt(tRun)) {
+                sRun++;
+                tRun++;
+            } else {
+                tRun++;
+            }
+        }
+
+        return sRun == s.length();
+    }
+}
