@@ -1,0 +1,36 @@
+class Solution {
+    public List<Integer> findSubstring(String s, String[] words) {
+        
+        List<Integer> subStrs = new ArrayList<Integer>();
+
+        if (s.length() < words[0].length()) {
+            return subStrs;
+        }
+
+        // map of words array, and how many times they appear in the map.
+        Map<String, Integer> wordMap = new HashMap<String, Integer>();
+        for (String word : words) {
+            wordMap.put(word, wordMap.getOrDefault(word, 0) + 1);
+        }
+
+        int  wordLen = words[0].length(), 
+             subsLen = words.length * wordLen;
+
+        for (int i = 0; i <= s.length() - subsLen; i++) {
+
+            Map<String, Integer> splitS = new HashMap<String, Integer>();
+            String tempS = s.substring(i, i + subsLen);
+
+            for (int j = 0; j < subsLen; j += wordLen) {
+                String tempWord = tempS.substring(j, j + wordLen);
+                splitS.put(tempWord, splitS.getOrDefault(tempWord, 0) + 1);
+            }
+            
+            if (wordMap.equals(splitS)) {
+                subStrs.add(i);
+            }
+        }
+
+    return subStrs;
+    }
+}
