@@ -1,0 +1,34 @@
+class Solution {
+    public long dividePlayers(int[] skill) {
+
+        if (skill.length == 2) {
+            return skill[0] * skill[1];
+        }
+
+        int skillSum = 0;
+
+        for (int s : skill) {
+            skillSum += s;
+        }
+
+        if (skillSum % (skill.length/2) != 0) {
+            return -1;
+        }
+
+        Arrays.sort(skill);
+        long chemistrySum = 0L;
+        int start = 0, end = (skill.length - 1);
+        int teamSkill = skillSum/(skill.length/2);
+
+        while(start < end) {
+            if (skill[start] + skill[end] != teamSkill) {
+                return -1;
+            }
+            chemistrySum += skill[start] * skill[end];
+            start++;
+            end--;
+        }
+
+        return chemistrySum;
+    }
+}
