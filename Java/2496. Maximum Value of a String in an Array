@@ -1,0 +1,23 @@
+class Solution {
+    public int maximumValue(String[] strs) {
+        int max = Integer.MIN_VALUE;
+
+        for (int i = 0; i < strs.length; i++) {
+            max = Math.max(max, isNumber(strs[i]));
+        }
+
+        return max;
+
+    }
+
+    public int isNumber(String s) {
+
+        for (int i = 0; i < s.length(); i++) {
+            if (!Character.isDigit(s.charAt(i))) {
+                return s.length();
+            }
+        }
+
+        return Integer.parseInt(s);
+    }
+}
