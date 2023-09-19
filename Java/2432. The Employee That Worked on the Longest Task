@@ -1,0 +1,22 @@
+class Solution {
+    public int hardestWorker(int n, int[][] logs) {
+        int totalTime = 0, maxTime = Integer.MIN_VALUE, maxID = -1;
+
+        if (logs.length == 1) {
+            return logs[0][0];
+        }
+
+        for (int i = 0; i < logs.length; i++) {
+
+            if ((logs[i][1] - totalTime) > maxTime) {
+                maxTime = (logs[i][1] - totalTime);
+                maxID = logs[i][0];
+            } else if ((logs[i][1] - totalTime) == maxTime) {
+                maxID = Math.min(logs[i][0], maxID);
+            }
+            totalTime = logs[i][1];
+
+        }
+        return maxID;
+    }
+}
