@@ -1,0 +1,16 @@
+class Solution {
+    public int commonFactors(int a, int b) {
+        int test = 1, min = Math.min(a, b), factors = 0;
+
+        while (test <= min) {
+            if (a % test == 0) {
+                if (b % test == 0) {
+                    factors++;
+                }
+            }
+            test++;
+        }
+
+    return factors;
+    }
+}
