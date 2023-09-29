@@ -1,0 +1,32 @@
+class Solution {
+    public int destroyTargets(int[] nums, int space) {
+
+        Arrays.sort(nums);
+        Map<Integer, Integer> targets = new HashMap<Integer, Integer>();
+        int minKey = Integer.MAX_VALUE;
+        int maxOcc = Integer.MIN_VALUE;
+
+        for (int i = 0; i < nums.length; i++) {
+            int key = nums[i] % space;
+            int count = targets.getOrDefault(key, 0) + 1; 
+            targets.put(key, count);
+
+            if (maxOcc < count) {
+                maxOcc = count;
+                minKey = key;
+            } else if (maxOcc == count) {
+                minKey = Math.min(key, minKey);
+            
+            }
+        }
+
+        for(int j = 0; j < nums.length; j++) {
+            if (targets.get(nums[j] % space) == maxOcc) {
+                return nums[j];
+            }
+        }
+
+        return -1;
+
+    }
+}
