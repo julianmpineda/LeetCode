@@ -1,0 +1,44 @@
+class Solution {
+    public int[][] generateMatrix(int n) {
+        int[][] spiral = new int[n][n];
+
+        int xMin = 0, xMax = n-1, xCount = 0;
+        int yMin = 0, yMax = n-1, yCount = 0;
+        int direction = 0, spaces = n*n;
+
+        // direction map, right, down, left, up
+        int[][] dirMap = new int[][]{{1,0}, {0,1}, {-1,0}, {0,-1}};
+
+        for (int i = 1; i <= spaces; i++) {
+            spiral[yCount][xCount] = i;
+
+            if (xCount == xMax && direction == 0) {
+                yMin++;
+                direction = 1;
+            }
+
+            if (yCount == yMax && direction == 1) {
+                System.out.println();
+                xMax--;
+                direction = 2;
+            }
+
+             if (xCount == xMin && direction == 2) {
+                System.out.println();
+                yMax--;
+                direction = 3;
+            }
+
+            if (yCount == yMin && direction == 3) {
+                System.out.println();
+                xMin++;
+                direction = 0;
+            }
+
+            xCount += dirMap[direction][0];
+            yCount += dirMap[direction][1];
+        }
+
+        return spiral;
+    }
+}
