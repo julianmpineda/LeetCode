@@ -1,0 +1,16 @@
+class Solution {
+    public String convertToTitle(int columnNumber) {
+        String excelNum = "";
+        int tempNum = columnNumber;
+
+        while (tempNum > 0) {
+            tempNum--;
+            int num = tempNum % 26;
+            num += 65;
+            excelNum = (char)(num) + excelNum;
+            tempNum /= 26;
+        }
+        
+        return excelNum;
+    }
+}
