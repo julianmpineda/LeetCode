@@ -1,0 +1,27 @@
+class Solution {
+    public int findTheWinner(int n, int k) {
+
+        if (k == 1) {
+            return n;
+        }
+
+        if (n == 1) {
+            return 1;
+        }
+
+        List<Integer> circle = new ArrayList<Integer>();
+        int pos = 0;
+
+        for (int i = 1; i <= n; i++){
+            circle.add(i);
+        }
+
+        while (circle.size() > 1) {
+            pos = (pos + (k-1)) % n;
+            circle.remove(pos);
+            n = circle.size();
+        }
+
+        return circle.get(0);
+    }
+}
