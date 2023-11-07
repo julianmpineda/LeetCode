@@ -1,0 +1,39 @@
+class Solution {
+    public int maxIceCream(int[] costs, int coins) {
+        int max = 0, min = Integer.MAX_VALUE, count = 0;
+        Long sumCost = 0L;
+
+        for (int i = 0; i < costs.length; i++) {
+            max = Math.max(max, costs[i]);
+            min = Math.min(min, costs[i]);
+            sumCost += costs[i];
+        }
+
+        if (coins < min) {
+            return 0;
+        } else if (coins >= sumCost) {
+            return costs.length;
+        }
+
+        int[] costsCount = new int[max + 1];
+
+        for (int j = 0; j < costs.length; j++) {
+            costsCount[costs[j]]++;
+        }
+
+        for (int k = 1; k < costsCount.length; k++) {
+
+            while(coins >= k && costsCount[k] > 0) {
+                coins -= k;
+                costsCount[k]--;
+                count++;
+            }
+
+            if (coins == 0 || k > coins) {
+                return count;
+            }     
+        }
+        
+        return count;
+    }
+}
