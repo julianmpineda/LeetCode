@@ -1,0 +1,48 @@
+class Solution {
+    public boolean isValidSudoku(char[][] board) {
+
+        //check across and down for duplicates
+        for (int i = 0; i < 9; i++) {
+            int[] across = new int[9];
+            int[] down = new int[9];
+
+            for (int j = 0; j < 9; j++) {
+
+                if (Character.isDigit(board[i][j])) {
+                    int space = board[i][j] - '0' - 1;
+                    across[space]++;
+                    if (across[space] > 1) {
+                        return false;
+                    }
+                }
+
+                if (Character.isDigit(board[j][i])) {
+                    int space = board[j][i] - '0' - 1;
+                    down[space]++;
+                    if (down[space] > 1) {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        //check each box
+        for (int z = 0; z <= 6; z+= 3) {
+            for (int y = 0; y <= 6; y+= 3) {
+                int[] box = new int[9];
+                for (int r = 0; r < 3; r++) {
+                    for (int s = 0; s < 3; s++) {
+                        if (Character.isDigit(board[z + r][y + s])) {
+                            int space = board[z + r][y + s] - '0' - 1;
+                            box[space]++;
+                            if (box[space] > 1) {
+                                return false;
+                            } 
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }
+}
