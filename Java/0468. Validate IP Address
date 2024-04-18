@@ -1,0 +1,69 @@
+class Solution {
+    public String validIPAddress(String queryIP) {
+        
+        int dotCount = 0, colCount = 0;
+        
+        for (int r = 0; r < queryIP.length(); r++) {
+            if (queryIP.charAt(r) == '.') {
+                dotCount++;
+            } else if (queryIP.charAt(r) == ':') {
+                colCount++;
+            }
+        }
+        
+        if (dotCount > 0 && colCount > 0) {
+            return "Neither";
+        } else if (dotCount < 3 && colCount < 7) {
+            return "Neither";
+        } else if (dotCount > 3 || colCount > 7) {
+            return "Neither";
+        }
+        
+        String[] ipSplit = queryIP.split("\\.|\\:");
+        
+        if (!(ipSplit.length == 4 || ipSplit.length == 8)) {
+            return "Neither";
+        }
+        
+        if (ipSplit.length == 4 && !queryIP.contains(".")) {
+            return "Neither";
+        } else if (ipSplit.length == 8 && !queryIP.contains(":")) {
+            return "Neither";
+        }
+        
+        if (ipSplit.length == 4) {
+            for (int i = 0; i < 4; i++) {
+                
+                try {
+                    int test = Integer.parseInt(ipSplit[i]);
+                } catch (NumberFormatException nfe) {
+                    return "Neither";
+                }
+                 
+                if (ipSplit[i].length() > 1 && ipSplit[i].charAt(0) == '0') {
+                    return "Neither";
+                } else if (Integer.parseInt(ipSplit[i]) > 255) {
+                    return "Neither";
+                }
+            }
+            
+            return "IPv4";
+        }
+        
+        if (ipSplit.length == 8) {
+            for (int m = 0; m < 8; m++) {
+                
+                if (ipSplit[m].length() > 4 || ipSplit[m].length() <= 0) {
+                    return "Neither";
+                }
+                
+                if (ipSplit[m].matches(".*[G-Zg-z].*")) {
+                    return "Neither";
+                }
+            }
+            return "IPv6";
+        
+        }
+        return "end";
+    }
+}
