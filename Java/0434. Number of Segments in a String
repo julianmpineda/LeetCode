@@ -1,0 +1,31 @@
+class Solution {
+    public int countSegments(String s) {
+
+        if (s.length() == 0) {
+            return 0;
+        } else if (s.length() == 1) {
+            if (s.charAt(0) == ' ') {
+                return 0;
+            }
+        }
+
+        int sum = 0;
+        Boolean word = false;
+
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+
+            if (word && c == ' ') {
+                sum++;
+                word = false;
+            } else if (!word && c != ' ') {
+                word = true;
+            }
+        }
+        if (word) {
+            sum++;
+        }
+
+        return sum;
+    }
+}
