@@ -1,0 +1,62 @@
+class Solution {
+    public String originalDigits(String s) {
+
+        int[] letters = new int[10];
+        int[] num = new int[10];
+
+        for (char c : s.toCharArray()) {
+            switch(c) {
+                case 'g':
+                    letters[0]++;
+                    break;
+                case 'f':
+                    letters[1]++;
+                    break;
+                case 'i':
+                    letters[2]++;
+                    break;
+                case 'o':
+                    letters[3]++;
+                    break;    
+                case 'r':
+                    letters[4]++;
+                    break;
+                case 'u':
+                    letters[5]++;
+                    break;
+                case 'w':
+                    letters[6]++;
+                    break;  
+                case 'v':
+                    letters[7]++;
+                    break;
+                case 'x':
+                    letters[8]++;
+                    break;
+                case 'z':
+                    letters[9]++;
+                    break;
+            }
+        }
+
+        num[0] = letters[9]; //Zero
+        num[2] = letters[6]; //tWo
+        num[4] = letters[5]; //foUr
+        num[1] = letters[3] - num[0] - num[2] - num[4]; //One
+        num[3] = letters[4] - num[0] - num[4]; //thRee
+        num[5] = letters[1] - num[4]; //Five
+        num[6] = letters[8]; //siX
+        num[7] = letters[7] - num[5]; //seVen
+        num[8] = letters[0]; //eiGht
+        num[9] = letters[2] - num[5] - num[6] - num[8]; //nIne
+
+        StringBuilder output = new StringBuilder();
+        for (int m = 0; m < 10; m++) {
+            for (int n = 0; n < num[m]; n++) {
+                output.append(m);
+            }
+        }
+
+        return output.toString();
+    }
+}
