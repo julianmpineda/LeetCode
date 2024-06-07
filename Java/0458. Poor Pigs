@@ -1,0 +1,21 @@
+class Solution {
+    public int poorPigs(int buckets, int minutesToDie, int minutesToTest) {
+
+        int count = 0, base = (minutesToTest/minutesToDie + 1);
+        
+        while (Math.pow(base, count) < buckets) {
+            count++;
+        }
+
+        return count;
+    }
+}
+
+/* The coding for this was trivial, it was really the math I had a hard
+   time understanding. The hints on LeetCode spell out the solution, but
+   don't explain it at all. I googled it and checked a few blogs, primarily
+   https://algo.monster/liteproblems/458 and this comment by user NikkiNicholas
+   (https://leetcode.com/problems/poor-pigs/solutions/94273/solution-with-detailed-explanation/)
+   that really helped me write out my own examples and figure out why
+   the proposed math worked.
+*/
