@@ -1,0 +1,18 @@
+class Solution {
+    public List<Integer> findDisappearedNumbers(int[] nums) {
+        int[] nCount = new int[nums.length + 1];
+        List<Integer> missing = new ArrayList<>();
+
+        for (int n : nums) {
+            nCount[n]++;
+        }
+
+        for (int i = 1; i < nCount.length; i++) {
+            if (nCount[i] == 0) {
+                missing.add(i);
+            }
+        }
+
+        return missing;
+    }
+}
