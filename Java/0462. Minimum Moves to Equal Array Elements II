@@ -1,0 +1,21 @@
+class Solution {
+    public int minMoves2(int[] nums) {
+
+        Arrays.sort(nums);
+
+        int median = nums[nums.length/2];
+        int sumDiff = 0;
+
+        for (int y: nums) {
+            sumDiff += Math.abs(y - median);
+        }
+
+        return sumDiff;
+    }
+}
+
+/*
+  Initially used the average to calculate, but found that it
+  failed when there were larger jumps within the array,
+  specifically testcast [1,0,0,8,9]. 
+*/
