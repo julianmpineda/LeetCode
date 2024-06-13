@@ -1,0 +1,29 @@
+class Solution {
+    public int findTargetSumWays(int[] nums, int target) {
+
+        return nextTarget(nums, target, 0, 0);
+    }
+
+    private static int nextTarget(int[] nums, int target, int numSum, int index) {
+        int ways = 0;
+
+        if (index == nums.length) {
+            if (numSum == target) {
+                return 1;
+            } else {
+                return 0;
+            }
+        }
+
+        ways += nextTarget(nums, target, (numSum + nums[index]), (index + 1));
+        ways += nextTarget(nums, target, (numSum - nums[index]), (index + 1));
+        return ways;
+    }
+}
+
+/* 
+  Quick brute force recursive method. Could add a pre-filter for
+  some test cases; ones where the target > total sum of nums, 
+  or target < total difference of nums, or other mathematical reasons
+  where the answer is always 0.
+*/
