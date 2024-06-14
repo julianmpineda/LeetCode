@@ -1,0 +1,30 @@
+/*
+  Easy base conversion, but was able to play with
+  Stringbuilder a bit more.
+*/
+
+class Solution {
+    public String convertToBase7(int num) {
+        int remainder = 0;
+        StringBuilder num7 = new StringBuilder();
+        Boolean sign = (num >= 0);
+
+        if (Math.abs(num) <= 6) {
+            return "" + num;
+        }
+
+        num = Math.abs(num);
+
+        while (num > 0) {
+            remainder = num % 7;
+            num /= 7;
+            num7.append(remainder);
+        }
+
+        if (!sign) {
+            num7.append('-');
+        }
+
+        return num7.reverse().toString();
+    }
+}
