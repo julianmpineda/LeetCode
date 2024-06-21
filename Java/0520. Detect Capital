@@ -1,0 +1,17 @@
+/*
+  Easy problem, but set my own constraint to do this without looping, 
+  and had initially written out multiple if statements. Realized it 
+  could be condensed into a single return. Substring from my research
+  runs in 0(n) time based on the length of the resulting string, so by 
+  assigning it to a variable saves time instead of calling it 3 times.
+*/
+
+class Solution {
+    public boolean detectCapitalUse(String word) {
+        
+        String ord = word.substring(1);
+        
+        return (ord.equals(ord.toLowerCase()) ||
+            (Character.isUpperCase(word.charAt(0)) && ord.equals(ord.toUpperCase())));
+    }
+}
