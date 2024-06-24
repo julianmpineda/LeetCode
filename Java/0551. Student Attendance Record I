@@ -1,0 +1,28 @@
+/*
+  Quick easy. No notes, but thought the way it counts consecutive tardy
+  was nice.
+*/
+
+class Solution {
+    public boolean checkRecord(String s) {
+        
+        int absent = 0, late = 0;
+
+        for (char c : s.toCharArray()) {
+            if  (c == 'L') {
+                late++;
+            } else {
+                late = 0;
+                if (c == 'A') {
+                    absent++;
+                }
+            }
+
+            if (late > 2 || absent > 1) {
+                return false;
+            }
+        }  
+
+        return true;
+    }
+}
