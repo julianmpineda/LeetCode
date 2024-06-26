@@ -1,0 +1,23 @@
+/*
+  This is the hinted solution, with the addition of a flag when
+  the count go over n/2. The addition ended up cutting a 
+  significant amount of time from the submission; a lot of the
+  test cases must have candytypes over n/2.
+*/
+
+class Solution {
+    public int distributeCandies(int[] candyType) {
+
+        Set<Integer> candy = new HashSet<>();
+
+        for (int x : candyType) {
+            candy.add(x);
+
+            if (candy.size() == candyType.length/2) {
+                return candyType.length/2;
+            }
+        }
+        
+        return candy.size();
+    }
+}
