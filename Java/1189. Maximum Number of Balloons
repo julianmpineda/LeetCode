@@ -1,0 +1,36 @@
+class Solution {
+    public int maxNumberOfBalloons(String text) {
+        
+        int[] balon = new int[5];
+        int min = Integer.MAX_VALUE;
+
+        for (char s : text.toCharArray()) {
+            switch(s) {
+                case 'b':
+                    balon[0]++;
+                    break;
+                case 'a':
+                    balon[1]++;
+                    break;
+                case 'l':
+                    balon[2]++;
+                    break;
+                case 'o':
+                    balon[3]++;
+                    break;
+                case 'n':
+                    balon[4]++;
+                    break;
+            }
+        }
+
+        balon[2] /= 2;
+        balon[3] /= 2;
+
+        for (int x : balon) {
+            min = Math.min(x, min);
+        }
+
+        return min;
+    }
+}
