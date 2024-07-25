@@ -1,0 +1,23 @@
+/*
+  The key is realizing that it costs '0' to move coins 2 spaces, 
+  so it is free to move any amount while keeping parity. Then, 
+  it's just a matter of moving all of them onto the same 
+  spot. The end cost is whichever parity has less coins.
+*/
+
+class Solution {
+    public int minCostToMoveChips(int[] position) {
+
+        int odd = 0, even = 0;
+
+        for (int x : position) {
+            if (x % 2 == 0) {
+                even++;
+            } else {
+                odd++;
+            }
+        }
+        
+        return Math.min(odd, even);
+    }
+}
