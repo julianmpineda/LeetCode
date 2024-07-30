@@ -1,0 +1,46 @@
+/*
+  Two passes, first removes extra ')', second removes 
+  extra '('. First pass builds new string to avoid the issues
+  with removing while iterating. Slower, but works. Could be
+  reconfigured to remove in place both passes I think.
+*/
+
+class Solution {
+    public String minRemoveToMakeValid(String s) {
+
+        int open = 0, close = 0;
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+
+            if (Character.isLetter(c)) {
+                sb.append(c);
+            } else if (c == '(') {
+                sb.append(c);
+                open++;
+            } else if (c == ')') {
+                if (open > 0) {
+                    sb.append(c);
+                    open--;
+                }
+            }
+        }
+
+        for (int j = sb.length() - 1; j >= 0; j--) {
+            char c = sb.charAt(j);
+
+            if (c == ')') {
+                close++;
+            } else if (c == '(') {
+                if (close <= 0) {
+                    sb.deleteCharAt(j);
+                } else {
+                    close--;
+                }
+            }
+        }
+
+        return sb.toString();
+    }
+}
