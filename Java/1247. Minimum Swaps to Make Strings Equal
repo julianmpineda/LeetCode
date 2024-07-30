@@ -1,0 +1,41 @@
+/*
+  There likely exists a better way to use math
+  to achieve the same result as a 5 branch if,
+  but this is much more readable. It should be
+  refined if it was going to be run constantly.
+  Final return used for error checking, it should
+  be unreachable.
+*/
+
+class Solution {
+    public int minimumSwap(String s1, String s2) {
+    
+        if (s1.equals(s2)) {
+            return 0;
+        }
+
+        int x = 0, y = 0;
+
+        for (int i = 0; i < s1.length(); i++) {
+            if (s1.charAt(i) != s2.charAt(i)) {
+                if (s1.charAt(i) == 'x') {
+                    x++;
+                } else {
+                    y++;
+                }
+            }
+        }
+
+        if ((x + y) % 2 != 0) {
+            return -1;
+        } else if (x == 1 && y == 1) {
+            return 2;
+        } else if (x % 2 == 0) {
+            return (x + y)/2;
+        } else if (x % 2 != 0) {
+            return (x + y)/2 + 1;
+        }
+
+        return -100;
+    }
+}
