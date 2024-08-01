@@ -1,0 +1,31 @@
+/* 
+  Initially written with a loop that counts out small burgers,
+  then backfills with jumbo burgers. This works, but it's pretty slow.
+  It also makes more sense to calculate the bigger burgers first, then
+  fill in the smaller ones. Since the loop only really was doing addition,
+  which then had to be fixed via math anyway, it was easy to see that
+  a pure math solution could work.
+*/
+
+class Solution {
+    public List<Integer> numOfBurgers(int tomatoSlices, int cheeseSlices) {
+        
+        List<Integer> burgers = new ArrayList<Integer>();
+        int jumbo = 0, small = 0;
+
+        if (tomatoSlices % 2 != 0 || tomatoSlices < 2*cheeseSlices) {
+            return burgers;
+        }
+
+        jumbo = (tomatoSlices - (2 * cheeseSlices)) / 2;
+        small = cheeseSlices - jumbo;
+
+        if (small >= 0) {
+            burgers.add(jumbo);
+            burgers.add(small);
+        } 
+
+        return burgers;
+
+    }
+}
