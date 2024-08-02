@@ -1,0 +1,38 @@
+/*
+  Quick brute force way. Can be achieved much faster using
+  bit shift. Will work on it on Monday.
+*/
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public int getDecimalValue(ListNode head) {
+        
+        String bin = "";
+        int dec = 0, len = 0;
+
+        while (head.next != null) {
+            bin += "" + head.val;
+            head = head.next;
+            len++;
+        }
+
+        bin += "" + head.val;
+
+        for (int i = 0; i <= len; i++) {
+            if (bin.charAt(i) == '1') {
+                dec += Math.pow(2, (len - i)); 
+            }
+        }
+
+        return dec;
+    }
+}
