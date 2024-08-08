@@ -1,0 +1,26 @@
+/*
+  Easy once you realize you can just "zero-out"
+  integers in sequence, and use zero.
+*/
+
+class Solution {
+    public int[] sumZero(int n) {
+        
+        int[] addends = new int[n];
+        int next = 1, end = n - 1;
+
+        if (n % 2 == 1) {
+            addends[end] = 0;
+            end--;
+        }
+
+        for (int i = 0; i < end; i++) {
+            addends[i] = next;
+            i++;
+            addends[i] = -1 * next;
+            next++;
+        }
+
+        return addends;
+    }
+}
