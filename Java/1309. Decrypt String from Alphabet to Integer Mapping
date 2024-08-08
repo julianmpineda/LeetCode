@@ -1,0 +1,27 @@
+/*
+  Somewhat unreadable, but wanted to try to cut it down as much as possible
+  and have as few variables and overhead as I could. Started with a regular
+  String but realized StringBuilder would run much faster and decided to trim
+  it down even more.
+*/
+
+class Solution {
+    public String freqAlphabets(String s) {
+        
+        StringBuilder alpha = new StringBuilder();
+
+        for (int i = s.length() - 1; i >= 0; i--) {
+
+            if ( s.charAt(i) == '#') {
+                alpha.append((char)(((s.charAt(i-2) - '0') *10 + (s.charAt(i-1) - '0')) + 96));
+                i -= 2;
+            } else {
+                alpha.append((char)((s.charAt(i) - '0') + 96));
+            }
+        } 
+
+        alpha.reverse();
+
+        return alpha.toString();
+    }
+}
