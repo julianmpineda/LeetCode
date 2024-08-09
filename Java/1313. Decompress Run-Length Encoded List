@@ -1,0 +1,27 @@
+/*
+  3rd iteration: first used a list then converted to array.
+  Second used the array, but nested for loop to fill it.
+  Third now is the current state, Arrays.fill() shaves off
+  a few ms.
+*/
+
+class Solution {
+    public int[] decompressRLElist(int[] nums) {
+        
+        List<Integer> dcList = new ArrayList<>();
+        int size = 0, count = 0;
+
+        for (int m = 0; m < nums.length; m += 2) {
+            size += nums[m];
+        }
+
+        int[] list = new int[size];
+
+        for (int i = 0; i < nums.length; i += 2) {
+            Arrays.fill(list, count, count + nums[i], nums[i + 1]);
+            count += nums[i];
+        }
+
+        return list;
+    }
+}
