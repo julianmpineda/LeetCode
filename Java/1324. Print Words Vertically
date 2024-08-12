@@ -1,0 +1,34 @@
+/*
+  Hardest thing is keeping track of the different indexes
+  for the loops and remembering the description says to 
+  not have any trailing spaces. More StringBuilder practice 
+  to keep runtime low. 
+*/
+
+class Solution {
+    public List<String> printVertically(String s) {
+        
+        String[] words = s.split(" ");
+        int maxLen = 0;
+
+        List<String> vertWords = new ArrayList<>();
+
+        for (String m : words) {
+            maxLen = Math.max(m.length(), maxLen);
+        }
+
+        for (int i = 0; i < maxLen; i++) {
+            StringBuilder tempSB = new StringBuilder();
+            for (int j = 0; j < words.length; j++) {
+                if (words[j].length() > i) {
+                    tempSB.append(words[j].charAt(i));
+                } else {
+                    tempSB.append(" ");
+                }
+            }
+             vertWords.add(tempSB.toString().stripTrailing());
+        }
+
+        return vertWords;
+    }
+}
