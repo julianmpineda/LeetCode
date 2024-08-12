@@ -1,0 +1,24 @@
+/*
+  Wrote an ugly one-line solution, but wanted to try to do it
+  without replaceFirst() as well as practice with using 
+  StringBuilder class.
+*/
+
+class Solution {
+    public int maximum69Number (int num) {
+
+        StringBuilder numStr = new StringBuilder(String.valueOf(num));
+
+        for (int i = 0; i < numStr.length(); i++) {
+            if (numStr.charAt(i) == '6') {
+                numStr.setCharAt(i, '9');
+                break;
+            }
+        }
+
+        return Integer.valueOf(numStr.toString());
+
+        //"Fun" one-line solution
+        //return Integer.valueOf(String.valueOf(num).replaceFirst("6", "9"));
+    }
+}
