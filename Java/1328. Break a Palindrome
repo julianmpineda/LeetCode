@@ -1,0 +1,32 @@
+/*
+  Code ignores the middle character for odd length strings
+  since changing it makes no difference. Detects and changes
+  either the first non-'a' in the first half, or if all 
+  letters are 'a', changes the last to 'b'.
+*/
+
+class Solution {
+    public String breakPalindrome(String palindrome) {
+        
+        if (palindrome.length() == 1) {
+            return "";
+        }
+
+        int half = palindrome.length() / 2;
+        StringBuilder pSB = new StringBuilder(palindrome);
+
+        for (int i = 0; i < half; i++) {
+            if (palindrome.charAt(i) != 'a') {
+                pSB.setCharAt(i, 'a');
+                break;
+            }
+
+            if (i == half - 1) {
+                pSB.setCharAt(palindrome.length() - 1, 'b');
+            }
+        }
+
+        return pSB.toString();
+
+    }
+}
