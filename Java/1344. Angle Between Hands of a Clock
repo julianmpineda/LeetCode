@@ -1,0 +1,15 @@
+/*
+  Trivial to code, the issue is trying to decipher the math.
+  The minute hand makes the full 360 degree rotation in 60 mins,
+  so the it moves 1 degree every 6 minutes. The hour hand is a 
+  bit more work, but will rotate in 12 hours, or 720 minutes. 
+  Each hour is 30 degrees, so each minute is .5 degrees. Also need
+  to remember that 12 hour should be to 0.
+*/
+
+class Solution {
+    public double angleClock(int hour, int minutes) {
+
+        return Math.abs((hour % 12) * 30 + minutes * .5) - (6 * minutes));
+    }
+}
