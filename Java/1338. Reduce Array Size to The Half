@@ -1,0 +1,31 @@
+/*
+  Second iteration. First iteration used a hashmap, with
+  the values then put in a list. Very resource heavy and
+  redundant. With a known array size, it's slightly over
+  twice as fast to just use a huge array. Sorting the array
+  is the largest timesink.
+*/
+
+class Solution {
+    public int minSetSize(int[] arr) {
+    
+        int max = Integer.MIN_VALUE;
+        int[] freq = new int[100001];
+
+        for (int a : arr) {
+            freq[a]++;
+        }
+
+        Arrays.sort(freq);
+
+        int sum = 0, size = 0;
+
+        while (sum < arr.length/2) {
+            sum += freq[100000 - size];
+            size++;            
+        }
+
+        return size;
+
+    }
+}
