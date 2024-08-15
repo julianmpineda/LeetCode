@@ -1,0 +1,28 @@
+/*
+  Very simple in the end. Count the letters in s,
+  find the ones that don't match in t. Make sure to
+  only count the differences from one string to the 
+  other, and not both strings to each other.
+*/
+
+class Solution {
+    public int minSteps(String s, String t) {
+
+        int[] alpha = new int[26];
+        int diff = 0;
+
+        for (char cs : s.toCharArray()) {
+            alpha[cs - 'a']++;
+        }
+
+        for (char ct : t.toCharArray()) {
+            if (alpha[ct - 'a'] == 0) {
+                diff++;
+            } else {
+                alpha[ct - 'a']--;
+            }
+        }
+
+        return diff;
+    }
+}
