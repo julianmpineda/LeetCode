@@ -1,0 +1,54 @@
+/*
+  Finding the validity of parentheses using a stack/deque
+  was fairly simple, had seen and coded it before. I had a much
+  harder time tracking the length of the substring. Since I was
+  only checking validity when encountering ')', I was getting
+  errors when strings included extra '('. I attempted to try
+  the string flipped ['(()(()' becomes '())())'] but was running
+  into the same problem on certain strings.
+
+  User "uuisafresh" recommended using an array to keep track of strings,
+  changing valid parentheses pairs to "1" in the array then counting that.
+  Modified the original code to stack indexes instead of chars, and was
+  able to get it working with the only minor hiccup being not realizing 
+  that a deque pops FIFO vs a stacks LIFO. Good deque practice.
+*/
+
+class Solution {
+    public int longestValidParentheses(String s) {
+
+        int[] sArr = new int[s.length()];
+        Deque<Integer> stack = new ArrayDeque<>(s.length());
+        int count = 0, max = Integer.MIN_VALUE, match = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+
+            char c = s.charAt(i);
+
+            if (c == '(') {
+                stack.add(i);
+                sArr[i] = 0;
+            } else {
+                if (stack.peekLast() != null && s.charAt(stack.peekLast()) == '(') {
+                    match = stack.pollLast();
+                    sArr[match] = 1;
+                    sArr[i] = 1;
+                } else {
+                    stack.add(i);
+                    sArr[i] = 0;
+                }
+            }
+        }
+
+        for (int x : sArr) {      
+            if (x == 1) {
+                count++;
+            } else {
+                max = Math.max(count, max);
+                count = 0;
+            }
+        }
+        
+        return Math.max(count, max);
+    }
+}
