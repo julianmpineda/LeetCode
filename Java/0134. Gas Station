@@ -1,0 +1,59 @@
+/*
+  Needlessly complicated and long way to achieve it. Not optimized
+  at all; uses too much space, too many loops. Will work on refining it
+  now that the basis has been laid out.
+*/
+
+class Solution {
+    public int canCompleteCircuit(int[] gas, int[] cost) {
+
+        if (gas.length == 1 && gas[0] >= cost[0]) {
+            return 0;
+        }
+        
+        int start = 0, end = 0, gasT = 0, costT = 0, count = 0;
+        List<Integer> posInd = new ArrayList<>(); 
+
+        for (int i = 0; i < gas.length; i++) {
+            gasT += gas[i];
+            costT += cost[i];
+            if (gas[i] >= cost[i]) {
+                posInd.add(i);
+            }
+        }
+
+        if (gasT < costT) {
+            return -1;
+        }
+
+        while (count < posInd.size()) {
+
+            start = posInd.get(count);
+            //System.out.println("Starting at: " + start);
+            end = start;
+            gasT = 0;
+
+            gasT += gas[start];
+            gasT -= cost[start];
+            start = (start + 1) % gas.length;
+
+            while (start != end) {
+                gasT += gas[start];
+                gasT -= cost[start];
+                start = (start + 1) % gas.length;
+
+                if (gasT <= 0 && start != end) {
+                    break;
+                }
+
+            }
+
+            if (start == end) {
+                return posInd.get(count);
+            }
+            count++;
+        }
+
+        return -1;
+    }
+}
