@@ -1,0 +1,40 @@
+/*
+  Uses Sieve of Eratosthenes. Good practice coding problem, but
+  not super useful to know. Tiny bit slow comapred to other submissions.
+  I think it's in the k loop, adds more complexity, it's possible
+  to cut it down more. Boolean array may help with runtime,
+  but the indexing would need to be altered.
+*/
+
+class Solution {
+    public int countPrimes(int n) {
+
+        if (n <= 2) {
+            return 0;
+        }
+
+        int count = 0;
+        int[] arr = new int[n];
+        arr[2] = 2;
+
+        for (int i = 3; i < n; i+=2) {
+            arr[i] = i;
+        }
+
+        for (int j = 2; j*j < n; j++) {
+            if (arr[j] != 0) {
+                int k = 2*arr[j];
+                while (k <= n-1) {
+                    arr[k] = 0;
+                    k += arr[j];
+                }
+            }
+
+        for (int x : arr) {
+            count += (x > 0) ? 1 : 0;
+        }
+        
+        return count;
+    
+    }
+}
