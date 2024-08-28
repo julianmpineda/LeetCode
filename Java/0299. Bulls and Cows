@@ -1,0 +1,41 @@
+/*
+  First wrote this using stringbuilder as a pseudo-array,
+  replacing "bulls" in the strings to avoid counting twice.
+  That method theoretically works for more strings with a change the
+  check char to something other than 'a', but is slower for the given 
+  problem. With a smaller fixed input size it's faster to just use 
+  the int array. StringBuilder at the end to save a couple ms.
+*/
+
+class Solution {
+    public String getHint(String secret, String guess) {
+
+        int[] digits = new int[10];
+        int bulls = 0, cows = 0;
+
+        for (int i = 0; i < secret.length(); i++) {
+            int s = secret.charAt(i) - '0';
+            int g = guess.charAt(i) - '0';
+
+            if (s == g) {
+                bulls++;
+                cows--;
+            }
+            digits[s]++;
+        }
+
+        for (int j = 0; j < secret.length(); j++) {
+            int g = guess.charAt(j) - '0';
+
+            if (digits[g] > 0) {
+                cows++;
+                digits[g]--;
+            }
+        }
+
+        StringBuilder hint = new StringBuilder();
+        hint.append(bulls).append('A').append(cows).append('B');
+
+        return hint.toString();
+    }
+}
