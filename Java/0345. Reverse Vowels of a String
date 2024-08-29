@@ -1,0 +1,38 @@
+/*
+  Marked easy, so maybe this is an unecessarily robust way to do it.
+  Fairly simple algorithm, scans and saves vowels, then scans again
+  and replaces them backwards. This retains the case for them as well.
+*/
+
+class Solution {
+    public String reverseVowels(String s) {
+        
+        StringBuilder reverse = new StringBuilder();
+        StringBuilder vowels = new StringBuilder();
+
+        for (char c : s.toCharArray()) {
+
+            char x = Character.toLowerCase(c);
+
+            if (x == 'a' || x == 'e' || x == 'i' || x == 'o' || x == 'u') {
+                vowels.append(c);
+            }
+        }
+
+        int count = vowels.length();
+
+        for (char d : s.toCharArray()) {
+
+            char y = Character.toLowerCase(d);
+            
+            if (y != 'a' && y != 'e' && y != 'i' && y != 'o' && y != 'u') {
+                reverse.append(d);
+            } else if (y == 'a' || y == 'e' || y == 'i' || y == 'o' || y == 'u') {
+                reverse.append(vowels.charAt(count - 1));
+                count--;
+            }
+        }
+
+        return reverse.toString();
+    }
+}
