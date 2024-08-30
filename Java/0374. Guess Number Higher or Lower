@@ -1,0 +1,40 @@
+/*
+  Quick binary search practice. Only real hiccup was not realizing
+  that (min + max) could overflow on some test cases. Solved by
+  distributing them before adding. Math.min/max helps in the very low
+  cases, otherwise will loop forever.
+*/
+
+/** 
+ * Forward declaration of guess API.
+ * @param  num   your guess
+ * @return 	     -1 if num is higher than the picked number
+ *			      1 if num is lower than the picked number
+ *               otherwise return 0
+ * int guess(int num);
+ */
+
+public class Solution extends GuessGame {
+    public int guessNumber(int n) {
+
+        if (n == 1) {
+            return 1;
+        }
+        
+        int guess = n/2, min = 0, max = n, hiLow = 10;
+
+        while (hiLow != 0) {
+            hiLow = guess(guess);
+            
+            if (hiLow == -1) {
+                max = guess;
+                guess = Math.min((min / 2 + max / 2), guess - 1);
+            } else if (hiLow == 1) {
+                min = guess;
+                guess = Math.max((min / 2 + max / 2), guess + 1);                
+            }
+        }
+
+        return guess;
+    }
+}
