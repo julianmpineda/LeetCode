@@ -1,0 +1,23 @@
+/*
+  Easy char counter problem.
+*/
+
+class Solution {
+    public boolean canConstruct(String ransomNote, String magazine) {
+        
+        char[] letters = new char[26];
+
+        for (char c : magazine.toCharArray()) {
+            letters[c - 'a']++;
+        }
+
+        for (char c : ransomNote.toCharArray()) {
+            if (letters[c - 'a'] > 0) {
+                letters[c - 'a']--;
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
+}
