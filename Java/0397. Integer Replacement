@@ -1,0 +1,32 @@
+/*
+  It's fairly straightforward with the only caveat being 
+  that adding 1 to be able to divide by 4 is better than 
+  subtracting. The most frustrating part is that it's not
+  clear that it should theoretically handle max int value
+  by going beyond int size.
+*/
+
+class Solution {
+    public int integerReplacement(int n) {
+        
+        int i = 0;
+        long nL = n;
+
+        while (nL > 1) {
+            if (nL %2 == 0) {
+                nL = nL/2;
+            } else {
+                if (nL == 3) {
+                    nL--;
+                } else if (((nL + 1) / 2) % 2 == 0) {
+                    nL++;
+                } else {
+                    nL--;
+                }
+            }
+            i++;
+        }
+
+        return i;
+    }
+}
