@@ -1,0 +1,48 @@
+/*
+  Counts the instances with an array. Then goes through
+  the array and adds all the distinct instances to a set,
+  while also adding all the duplicates to a list. Then goes
+  through the duplicates, brings it to a number that does not
+  exist in the instances set, counting how many instances are
+  removed, then adds the new amount to the instance list if 
+  it is not zero.
+*/
+
+class Solution {
+    public int minDeletions(String s) {
+        
+        int removals = 0;
+        int[] alpha = new int[26];
+        Set<Integer> instances = new HashSet<>();
+        List<Integer> repeats = new ArrayList<>();
+
+        for (char c : s.toCharArray()) {
+            alpha[c - 'a']++;
+        } 
+
+        for (int i = 0; i < 26; i++) {
+            if (alpha[i] > 0) {
+                if (!instances.contains(alpha[i])) {
+                    instances.add(alpha[i]);
+                } else {
+                    repeats.add(i);
+                }
+            }
+        }
+
+        for (int j = 0; j < repeats.size(); j++) {
+            int r = repeats.get(j);
+
+            while (instances.contains(alpha[r])) {
+                alpha[r]--;
+                removals++;
+            }
+
+            if (alpha[r] > 0) {
+                instances.add(alpha[r]);
+            }
+        }
+
+        return removals;
+    }
+}
