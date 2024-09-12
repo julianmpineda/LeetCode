@@ -1,0 +1,25 @@
+/*
+  Quick string build + comparison. Used StringBuilder
+  for speed.
+*/
+
+class Solution {
+    public boolean arrayStringsAreEqual(String[] word1, String[] word2) {
+        
+        StringBuilder test = new StringBuilder();
+        String one = "";
+
+        for (String sOne : word1) {
+            test.append(sOne);
+        }
+
+        one = test.toString();
+        test.setLength(0);
+
+        for (String sTwo : word2) {
+            test.append(sTwo);
+        }
+
+        return (one.equals(test.toString()));
+    }
+}
