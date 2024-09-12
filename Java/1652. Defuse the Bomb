@@ -1,0 +1,43 @@
+/*
+  Brute force version that sets - or + based on k value
+  instead of having an the same loop split over 2 ifs.
+*/
+
+class Solution {
+    public int[] decrypt(int[] code, int k) {
+
+        int[] newCode = new int[code.length];
+        int val = 1;
+
+        if (k > 0) {
+            val = 1;
+        } else if (k < 0) {
+            val = -1;
+        } else {
+            return newCode;
+        }
+
+        for (int i = 0; i < code.length; i++) {
+            int index = i, count = 0;
+            int sum = 0;
+            while (count < Math.abs(k)) {
+                
+                if (index == 0) {
+                    index = code.length;
+                } else if (index == code.length) {
+                    index = 0;
+                }
+
+                sum += code[(index + val) % code.length];
+                index += val;
+
+                count++;
+            }
+
+            newCode[i] = sum;
+        }
+
+        return newCode;
+
+    }
+}
