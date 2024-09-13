@@ -1,0 +1,27 @@
+/*
+  Trickiest was realzing you had to decrement n before
+  subtracting it from k to account for the reduced space.
+  Initial StringBuilder version proved slower than this 
+  array version over larger inputs.
+*/
+
+class Solution {
+    public String getSmallestString(int n, int k) {
+        
+        char[] num = new char[n];
+        
+        for(int i = n - 1; i >= 0; i--) {
+            if (k - n >= 26) {
+                num[i] = 'z';
+                k -= 26;
+                n--;
+            } else if (k - n < 26) {
+                num[i] = (char)(k - n + 97);
+                n--;
+                k -= k - n;
+            }
+        }
+
+        return new String(num);
+    }
+}
