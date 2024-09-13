@@ -1,0 +1,44 @@
+/*
+  Initially had stored both the pre and post sums
+  individually in a 2d array, but realized that I was just
+  wasting runtime by calculating and storing the post sums
+  with another for loop with multiple ifs, when I only 
+  needed to use the number once. I moved to calculating 
+  it at the point where it's needed, cutting down runtime
+  significantly.
+*/
+
+class Solution {
+    public int waysToMakeFair(int[] nums) {
+        
+        int count = 0, sumE = 0, sumO = 0;
+        int[] even = new int[nums.length];
+        int[] odd = new int[nums.length];
+
+        for (int i = 0; i < nums.length; i++) {
+
+            even[i] = sumE;
+            odd[i] = sumO;
+
+            if (i % 2 == 0) {
+                sumE += nums[i];
+            } else {
+                sumO += nums[i];
+            }
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            if (i % 2 == 0) {
+                if ((even[i] + (sumO - odd[i])) == (odd[i] + (sumE - even[i] - nums[i]))) {
+                    count++;
+                }
+            } else {
+                if ((odd[i] + (sumE - even[i])) == (even[i] + (sumO - odd[i] - nums[i]))) {
+                    count++;
+                }
+            }
+        }
+
+    return count;
+    }
+}
