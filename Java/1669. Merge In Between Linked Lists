@@ -1,0 +1,50 @@
+/*
+  Hardest part is keeping your listnodes straight. Using 2 listnodes to keep
+  track, and another to retain the original head. Inserting is fairly simple:
+  Traverse list1 till you hit "a", then use temp to traverse to "b". Then link
+  list2 to list1 (still at a), and then traverse list1 to the end of the newly
+  added list2. Now at the end of list1 (also the end of list2), link "b", held 
+  by temp, which is the rest of the original list1.
+*/
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode mergeInBetween(ListNode list1, int a, int b, ListNode list2) {
+
+        int count = 0;
+        ListNode temp = new ListNode();
+        ListNode head = list1;
+
+        while (count < (a - 1)) {
+            list1 = list1.next;
+            count++;
+        }
+
+        temp = list1.next;
+        a++;
+        list1.next = list2;
+
+        while (count < b) {
+            temp = temp.next;
+            count++;
+        }
+
+        while (list1.next != null) {
+            list1 = list1.next;
+            
+        }
+
+        list1.next = temp;
+
+        return head;
+    }
+}
