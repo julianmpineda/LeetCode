@@ -1,0 +1,19 @@
+/*
+  Easy enough to brute force with sequence and word only
+  being max length 100.
+*/
+
+class Solution {
+    public int maxRepeating(String sequence, String word) {
+
+        StringBuilder reWord = new StringBuilder(word);
+        int count = 0;
+        
+        while (sequence.contains(reWord.toString())) {
+            reWord.append(word);
+            count++;
+        }
+
+        return count;
+    }
+}
