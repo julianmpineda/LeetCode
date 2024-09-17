@@ -1,0 +1,41 @@
+/*
+  Easy string parser since there's no input validation. 
+  Wrote initially as an if statement, but decided that switch
+  might be marginally faster over longer strings.
+*/
+
+class Solution {
+    public String interpret(String command) {
+        
+        StringBuilder intCom = new StringBuilder();
+        int index = 0;
+
+        while (index < command.length()) {
+
+            switch (command.charAt(index)) {
+
+                case 'G':
+                    intCom.append('G');
+                    index++;
+                    break;
+
+                case '(':
+                    if (command.charAt(index + 1) == ')') {
+                        intCom.append('o');
+                        index += 2;
+                    } else {
+                        intCom.append("al");
+                        index += 4;
+                    }
+                    break;
+
+                case 'a':
+                    intCom.append("al");
+                    index += 2;
+                    break;
+            }
+        }
+        
+        return intCom.toString();
+    }
+}
