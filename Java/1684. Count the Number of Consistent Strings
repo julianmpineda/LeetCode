@@ -1,0 +1,36 @@
+/*
+  Started with a set instead of array, but the runtime over such a small
+  set is greater than an array. Tried a few variations to try to shave off 
+  some time. Don't think it mattered in the end more than the inherent 
+  randomness of the leetcode IDE. Tried using flags, ints, methods instead 
+  of nested loops, continues, breaks, labels, but all averaged the same time 
+  over multiple runs. This is the earliest version with an array and one of 
+  the more readable ones.
+*/
+
+class Solution {
+    public int countConsistentStrings(String allowed, String[] words) {
+        
+        char[] allArr = new char[26];
+        int count = 0;
+
+        for (char c : allowed.toCharArray()) {
+            allArr[c - 97]++;
+        }
+
+        for (String s : words) {
+            Boolean letter = true;
+            for (char d : s.toCharArray()) {
+                if (allArr[d - 97] == 0) {
+                    letter = false;
+                    break;
+                }
+            }
+            if (letter) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+}
