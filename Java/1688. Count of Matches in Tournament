@@ -1,0 +1,39 @@
+/*
+  This one feels a bit like cheating. Of course,
+  one could just actually loop through it and
+  do the calculation. I've included that as well at the bottom.
+  I would say though that understanding the math is a more valid
+  way to solve it.
+
+  Logically, each match will generate a loser till the ultimate 
+  winner is found. Therefore, each team can lose exactly once.
+  Since one team will not lose, then it's just n-1. Everything
+  else provided is unecessary even if the tournament structure 
+  is supposed to be unusual.
+*/
+
+class Solution {
+    public int numberOfMatches(int n) {
+        return n-1;
+    }
+}
+
+/*
+
+//Coded loop solution
+
+class Solution {
+    public int numberOfMatches(int n) {
+        
+        int count = 0;
+
+        while (n > 1) {
+            int mod = (n % 2);
+            n = n / 2 + mod;
+            count += n - mod;
+        }
+
+        return count;
+    }
+}
+*/
