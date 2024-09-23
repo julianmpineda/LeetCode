@@ -1,0 +1,19 @@
+/*
+  Medium for the thought process? Otherwise it is trivial
+  to code. Since you can make any "deci-binary" number you want,
+  you can add 1 to any position at any time. Therefore, the 
+  minimum is just the highest single digit in the string.
+*/
+
+class Solution {
+    public int minPartitions(String n) {
+        
+        int max = 0;
+        
+        for (char c : n.toCharArray()) {
+            max = Math.max(max, (c-'0'));
+        }
+
+        return max;
+    }
+}
