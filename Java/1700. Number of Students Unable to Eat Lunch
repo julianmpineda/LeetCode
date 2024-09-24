@@ -1,0 +1,31 @@
+/*
+  One pointer per array allows us to use a single loop. Loops through
+  students array until a match is found, then moves to the next sandwich.
+  Modifying the students array "removes" students that have claimed a 
+  sandwich and ensures they never match to a second. While loop exits 
+  once students has been looped through without a match.
+*/
+
+class Solution {
+    public int countStudents(int[] students, int[] sandwiches) {
+        
+        int sa = 0, st = 0, loop = 0, stLeft = students.length;
+
+        while (loop < stLeft) {
+
+            if (students[st] == sandwiches[sa]) {
+                students[st] = -1;
+                sa++;
+                stLeft--;
+                loop = 0;
+            } else if (students[st] >= 0){
+                loop++;
+            } 
+
+            st++;
+            st = st % students.length;
+        }
+
+        return stLeft;
+    }
+}
