@@ -1,0 +1,26 @@
+/*
+  Keeps running sum of current chef time, and updates it
+  to the arrival time if he is "free" when someone arrives.
+  Then totals how long each wait is, returning the average.
+*/
+
+class Solution {
+    public double averageWaitingTime(int[][] customers) {
+        int sum = 1;
+        double sumWait = 0;
+
+        for (int i = 0; i < customers.length; i++) {
+            int[] x = customers[i];
+
+            if (sum < x[0]) {
+                sum = x[0];
+            }
+
+            sum += x[1];          
+            sumWait += sum - x[0];
+        }
+
+        return sumWait/customers.length;
+    }
+}
+
