@@ -1,0 +1,29 @@
+/*
+  Tried some versions, this was my initial one and
+  ended up being the fastest still, though not by much.
+  I also tried hardcoding a giant if or with all ten vowels,
+  but for some reason ran 1ms longer. Similarly, the version
+  that converted the chars toLowerCase with a smaller if 
+  statement also ran slightly longer. Converting the
+  entire string toLowerCase ran much longer than any previous 
+  attempt.
+*/
+
+class Solution {
+    public boolean halvesAreAlike(String s) {
+        
+        int vA = 0, vB = 0, j = s.length() - 1;
+
+        for (int i = 0; i < s.length()/2; i++) {
+            if ("AEIOUaeiou".indexOf(s.charAt(i)) != -1) {
+                vA++;
+            }
+            if ("AEIOUaeiou".indexOf(s.charAt(j)) != -1) {
+                vB++;
+            }
+            j--;
+        }
+
+        return vA == vB;
+    }
+}
