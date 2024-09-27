@@ -1,0 +1,23 @@
+/*
+  Quick with a modifier for each new week.
+  Feel like there's a math way to do this, since it's
+  7! + (7 * week).
+*/
+
+class Solution {
+    public int totalMoney(int n) {
+
+        int total = 0, mondays = 0;
+
+        for (int i = 1; i <= n; i++) {
+            total += (i % 7) + mondays;
+
+            if (i % 7 == 0) {
+                total += 7;
+                mondays++;
+            }
+        }
+
+        return total;
+    }
+}
