@@ -1,0 +1,46 @@
+/*
+  No need to loop since you'd end up having to put per-index
+  if statements anyway.
+*/
+
+class Solution {
+    public String maximumTime(String time) {
+        StringBuilder maxTime = new StringBuilder();
+        
+        if (time.charAt(0) == '?') {
+            if (time.charAt(1) > '3' && time.charAt(1) != '?') {
+                maxTime.append('1');
+            } else {
+                maxTime.append('2');
+            }
+        } else {
+            maxTime.append(time.charAt(0));
+        }
+
+        if (time.charAt(1) == '?') {
+            if (time.charAt(0) == '1' || time.charAt(0) == '0') {
+                maxTime.append('9');
+            } else {
+                maxTime.append('3');
+            }
+        } else {
+            maxTime.append(time.charAt(1));
+        }
+
+        maxTime.append(':');
+
+        if (time.charAt(3) == '?') {
+            maxTime.append('5');
+        } else {
+            maxTime.append(time.charAt(3));
+        }
+
+        if (time.charAt(4) == '?') {
+            maxTime.append('9');
+        } else {
+            maxTime.append(time.charAt(4));
+        }
+
+        return maxTime.toString();
+    }
+}
