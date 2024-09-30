@@ -1,0 +1,19 @@
+/*
+  Just have to remember the starting elevation of 0
+  is a valid answer.
+*/
+
+class Solution {
+    public int largestAltitude(int[] gain) {
+
+        int max = Integer.MIN_VALUE, currE = 0;
+
+        for (int i = 0; i < gain.length; i ++) {
+            currE += gain[i];
+
+            max = Math.max(max, currE);
+        }
+
+        return Math.max(max, 0);
+    }
+}
