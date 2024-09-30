@@ -1,0 +1,11 @@
+/*
+  Deceptive part is that you don't actually need anything
+  from the followers_id column, since you just need to know
+  how many followers each ID has, not who it is.
+*/
+
+# Write your MySQL query statement below
+SELECT user_id, COUNT(user_id) AS followers_count
+FROM Followers
+GROUP BY user_id
+ORDER BY user_id
