@@ -1,0 +1,28 @@
+/*
+  Started with a map, but realized the constraints
+  were small enough to an array instead. The while loop
+  is a little funky, but it will stop once it's read all 
+  the numbers instead of going all the way to 100 everytime.
+*/
+
+class Solution {
+    public int sumOfUnique(int[] nums) {
+        
+        int[] unique = new int[101];
+        int sum = 0, count = 0, i = 1;
+
+        for (int x : nums) {
+            unique[x]++;
+        }
+
+        while (count < nums.length) {
+            if (unique[i] == 1) {
+                sum += i;
+            }
+            count += unique[i];
+            i++;
+        }
+
+        return sum;
+    }
+}
