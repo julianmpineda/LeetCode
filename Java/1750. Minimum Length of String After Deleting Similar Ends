@@ -1,0 +1,73 @@
+/*
+  Initially avoided doing a nested loop, and had a solution
+  (included below) that worked, but is more convuluted and takes up
+  more memory, while also being slower. Moving to a nested while solution
+  shaves off memory and runtime, which is counter intuitive to the normal
+  ideas about runtime. The trick is that the loop will actually not run the full
+  n^2 times since the inner loops decrement the outer loop. 
+*/
+
+class Solution {
+    public int minimumLength(String s) {
+        int start = 0, end = s.length()-1, count = s.length();
+        char[] sArr = s.toCharArray();
+
+        while (start < end) {
+            if (sArr[start] != sArr[end]) {
+                break;
+            } else {
+                char fix = sArr[start];
+                while ((start <= end) && (sArr[start] == fix)) {
+                    start++;
+                }
+                while ((start <= end) && (sArr[end] == fix)) {
+                    end--;
+                }
+            }
+
+        }
+
+        return end - start + 1;
+    }
+}
+
+/*
+class Solution {
+    public int minimumLength(String s) {
+        int start = 0, end = s.length()-1, count = s.length(), run = s.length();
+        char[] sArr = s.toCharArray();
+
+        if (sArr[start] != sArr[end]) {
+            return s.length();
+        } else if (s.length() == 1) {
+            return 1;
+        } 
+
+        char fix = sArr[start];
+
+        while (run > 0 && start < end && count > 0) {
+            if (sArr[start] == fix) {
+                start++;
+                count--;
+            }
+
+            if (sArr[end] == fix) {
+                end--;
+                count--;
+            }
+            
+            if (start == end && sArr[start] == fix && sArr[end] == fix) {
+                count--;
+            }
+
+            if (sArr[start] == sArr[end] && sArr[start] != fix) {
+                fix = sArr[end];
+            }
+ 
+            run--;
+        }
+
+        return count;
+    }
+}
+*/
