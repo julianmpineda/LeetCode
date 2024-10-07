@@ -1,0 +1,26 @@
+/*
+  Initially started with building then comparing both a 
+  01-starting and 10-starting alternating string. Realized
+  that I didn't need both. Then realized, I didn't even need
+  a comparison string, since I could just compare it against
+  the equation that made the string in the first place. Also
+  cut down from counting both non-matches to the 01 and
+  10 strings to just counting one and taking the inverse.
+
+  Tricky part was getting it to line up correctly when trying
+  to compare char to int, without messy casting.
+*/
+
+class Solution {
+    public int minOperations(String s) {
+        int one = 0;
+
+        for (int j = 0; j < s.length(); j++) {
+            if ((0 + s.charAt(j)) != ((j % 2) + 48)) {
+                one++;
+            }
+        }
+
+        return Math.min(one, (s.length() - one));
+    }
+}
