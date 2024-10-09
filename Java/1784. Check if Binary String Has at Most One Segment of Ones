@@ -1,0 +1,11 @@
+/*
+  Problem description is the most confusing part of this.
+  Had a loop that checked each char then realized what it
+  was asking and that it could be done in one line.
+*/
+
+class Solution {
+    public boolean checkOnesSegment(String s) {
+        return !s.contains("01");
+    }
+}
