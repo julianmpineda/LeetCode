@@ -1,0 +1,51 @@
+/*
+  Initial code was to build an array that counts any digits
+  the iterates through them to find the second largest (should
+  it exist. 
+
+  The second block is from one of the top scoring answers that
+  I wanted to try. Iterating through a for-loop with char feels
+  wrong somehow, even though it works.
+*/
+
+class Solution {
+    public int secondHighest(String s) {
+        int[] nums = new int[10];
+        int sLargest = -1, largest = -1;
+
+        for (char c : s.toCharArray()) {
+            if (Character.isDigit(c)) {
+                nums[c - 48]++;
+            }
+        }
+
+        for (int i = 10; i >= 0; i-) {
+            if (nums[i] > 0 && largest == -1) {
+                largest = i;
+            } else if (nums[i] > 0) {
+                sLargest = largest;
+                largest = i;
+            }
+        }
+
+        return sLargest;
+    }
+}
+
+/*
+class Solution {
+    public int secondHighest(String s) {
+        int large = 2;
+
+        for (char i = '9'; i >= '0'; i--) {
+            if (s.indexOf(i) > -1) {
+                large--;
+                if (large == 0) {
+                    return i - 48;
+                }
+            }
+        }  
+        return -1;
+    }
+}
+*/
