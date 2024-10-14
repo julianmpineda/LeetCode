@@ -1,0 +1,57 @@
+/*
+  Good bit of practice for classes and objects.
+  Snuck some garbage cleanup into some methods; leetcode
+  doesn't allow you to define new methods. Added it into 
+  methods that check the map. The extra list in the count method
+  adds some overhead, but results in a slightly faster runtime.
+*/
+
+class AuthenticationManager {
+    private Map<String, Integer> tokens = new HashMap<>();
+    private int seconds;
+
+    public AuthenticationManager(int timeToLive) {
+        seconds = timeToLive;
+    }
+    
+    public void generate(String tokenId, int currentTime) {
+        tokens.put(tokenId, currentTime + seconds);
+    }
+    
+    public void renew(String tokenId, int currentTime) {
+
+        if (tokens.getOrDefault(tokenId, 0) > currentTime) {
+            tokens.replace(tokenId, currentTime + seconds);
+        } else {
+            tokens.remove(tokenId);
+        }
+    }
+    
+    public int countUnexpiredTokens(int currentTime) {
+
+        int count = 0;
+        Set<String> delete = new HashSet<>();
+
+        for (String s : tokens.keySet()) {
+            if (tokens.get(s) > currentTime) {
+                count++;
+            } else {
+                delete.add(s);
+            }
+        }
+
+        for (String d : delete) {
+            tokens.remove(d);
+        }
+
+        return count;
+    }
+}
+
+/**
+ * Your AuthenticationManager object will be instantiated and called as such:
+ * AuthenticationManager obj = new AuthenticationManager(timeToLive);
+ * obj.generate(tokenId,currentTime);
+ * obj.renew(tokenId,currentTime);
+ * int param_3 = obj.countUnexpiredTokens(currentTime);
+ */
