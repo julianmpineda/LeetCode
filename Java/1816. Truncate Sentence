@@ -1,0 +1,25 @@
+/*
+  Thought this was going to be much more difficult
+  when reading it since I thought s might have leading or 
+  trailing spaces and had a whole setup with String.split()
+  and word length. Then when learning it was just normally 
+  constructed you can just count how many words there are by
+  checking the number of spaces.
+*/
+
+class Solution {
+    public String truncateSentence(String s, int k) {
+        
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == ' ') {
+                count--;
+            }
+
+            if (count == 0) {
+                return s.substring(0, end);
+            }
+        }
+
+        return s;
+    }
+}
