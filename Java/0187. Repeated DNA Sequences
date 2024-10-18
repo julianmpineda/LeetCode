@@ -1,0 +1,38 @@
+/*
+  Initially used a much more complicated solution
+  that involved a hashmap that counted repetitions
+  but realized it was unecessary since it just needs
+  to repeat at least once. Sliding window using a 
+  stringBuilder that constantly updated the beginning
+  and end was also unecessarily complicated.
+
+  One thing that is new is using set.add() as both 
+  a conditional and an action. Normally I wouldn't really
+  use it in that way since it reduces code legibility, but
+  it's always nice to try new things.
+*/
+
+class Solution {
+    public List<String> findRepeatedDnaSequences(String s) {
+
+        List<String> repeats = new ArrayList<>();
+
+        if (s.length() < 10) {
+            return repeats;
+        }
+
+        Set<String> passed = new HashSet<>();
+
+        for (int i = 0; i < s.length() - 9; i++) {
+            String subStr = s.substring(i, i + 10);
+
+            if (!passed.add(subStr)) {
+                if (!repeats.contains(subStr)) {
+                    repeats.add(subStr);
+                }
+            }
+        }
+
+        return repeats;
+    }
+}
