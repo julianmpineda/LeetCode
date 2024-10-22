@@ -1,0 +1,55 @@
+/*
+  2 versions of the program. The bottom commented one
+  is the original version, which works fine and is straightforward.
+  The "main" one creates a sum array based on the input array, which
+  makes it much much faster to calculate the sumRange. I wanted to
+  include the original, because in a real life program, this would
+  have more methods that would need the full array, and not just
+  the sum version.
+*/
+
+class NumArray {
+    
+    private int[] numSum;
+
+    public NumArray(int[] nums) {
+        numSum = new int[nums.length];
+        numSum[0] = nums[0];
+
+        for (int i = 1; i < nums.length; i++) {
+            numSum[i] = numSum[i-1] + nums[i];
+        }
+    }
+    
+    public int sumRange(int left, int right) {
+        if (left == 0) {
+            return numSum[right];
+        }
+        return numSum[right] - numSum[left - 1];
+    }
+}
+
+/**
+class NumArray {
+    private int[] nArr;
+
+    public NumArray(int[] nums) {
+        nArr = nums.clone();
+    }
+    
+    public int sumRange(int left, int right) {
+        int sum = 0;
+
+        for (int i = left; i <= right; i++) {
+            sum += nArr[i];
+        }
+
+        return sum;
+    }
+}
+
+
+ * Your NumArray object will be instantiated and called as such:
+ * NumArray obj = new NumArray(nums);
+ * int param_1 = obj.sumRange(left,right);
+ */
