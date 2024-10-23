@@ -1,0 +1,46 @@
+/*
+  Simple though verbose way of doing it. Similar to a more common
+  linked list version that I've done in the past. The carry and iterating
+  are usually the hardest parts.
+*/
+
+class Solution {
+    public String addStrings(String num1, String num2) {
+
+        if (num1.equals("0")) {
+            return num2;
+        } else if (num2.equals("0")) {
+            return num1;
+        }
+
+        StringBuilder bigNum = new StringBuilder();
+        int endO = num1.length() - 1, endT = num2.length() - 1, carry = 0; 
+
+        while (endO >= 0 || endT >= 0) {
+            int sum = carry;
+
+            if (endO >= 0) {
+                sum += num1.charAt(endO) - '0';
+                endO--;
+            }
+            if (endT >= 0) {
+                sum += num2.charAt(endT) - '0';
+                endT--;
+            }
+
+            if (sum > 9) {
+                sum -= 10;
+                carry = 1;
+            } else {
+                carry = 0;
+            }
+            bigNum.append(sum);
+        }
+
+        if (carry == 1) {
+            bigNum.append('1');
+        }
+
+    return bigNum.reverse().toString();
+    }
+}
