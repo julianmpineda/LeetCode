@@ -1,0 +1,61 @@
+/*
+  Running the zero case outside the loop feels convoluted,
+  but I wanted to set it up and avoid having to take a substring
+  every run. I was already going to loop to create "pSame", so it
+  made sense to me to just run it even though it felt redundant.
+  Otherwise, a "if (i == 0)" case could've worked to prevent it from 
+  modifying the char array.
+*/
+class Solution {
+    public List<Integer> findAnagrams(String s, String p) {
+        List<Integer> match = new ArrayList<>();
+
+        if (p.length() > s.length()) {
+            return match;
+        } else if (s.equals(p)) {
+            match.add(0);
+            return match;
+        }
+
+        int[] pArr = new int[26];
+        int[] sArr = new int[26];
+        String sub = s.substring(0, p.length());
+        int same = 0, pSame = 0;
+
+        for (char c : p.toCharArray()) {
+            pArr[c - 'a']++;
+        }
+
+        for (char c : sub.toCharArray()) {
+            sArr[c - 'a']++;
+        }
+
+        for (int i = 0; i < 26; i++) {
+            pSame += pArr[i];
+            if (sArr[i] > 0 && sArr[i] == pArr[i]) {
+                same += sArr[i];
+            }
+        }
+
+        if (same == p.length()) {
+            match.add(0);
+        }
+
+        for (int i = 1; i <= s.length() - p.length(); i++) {
+            same = 0;
+            sArr[s.charAt(i - 1) - 'a']--;
+            sArr[s.charAt(i + p.length() - 1) - 'a']++;
+
+            for (int j = 0; j < 26; j++) {
+                if (sArr[j] > 0 && sArr[j] == pArr[j]) {
+                    same += sArr[j];
+                }
+                if (same == pSame) {
+                    match.add(i);
+                    break;
+                }
+            }
+        }
+        return match;
+    }
+}
