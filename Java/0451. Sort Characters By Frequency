@@ -1,0 +1,39 @@
+/*
+  Not super happy with the triple loop, but constructing
+  a list of preprepared segments yielded no performance gains
+  despite removing a layer of loop overall.
+*/
+
+class Solution {
+    public String frequencySort(String s) {
+
+        if (s.length() < 3) {
+            return s;
+        }
+
+        Map<Character, Integer> freq = new HashMap<>();
+        StringBuilder sorted = new StringBuilder();
+        int max = 0;
+
+        for (char c : s.toCharArray()) {
+            freq.put(c, (freq.getOrDefault(c, 0) + 1));
+            max = Math.max(max, freq.get(c));
+        }
+
+        while (max > 0) {
+            if (freq.values().contains(max)) {
+                for (char x : freq.keySet()) {
+                    if (freq.get(x) == max) {
+                        for (int i = 0; i < max; i++) {
+                            sorted.append(x);
+                        }
+      
+                    }
+                }
+            }
+            max--;
+        }
+
+        return sorted.toString();
+    }
+}
