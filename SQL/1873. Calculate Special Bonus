@@ -1,0 +1,17 @@
+/*
+  The two WHEN clauses can be combined into
+  a single clause with OR, but since they use
+  distinctly different columns it feels more readable
+  to split them even if they achieve the same thing.
+  It will always catch 'M' names first this way as well.
+*/
+
+# Write your MySQL query statement below
+SELECT employee_id, 
+CASE
+    WHEN name LIKE 'M%' THEN 0
+    WHEN employee_id % 2 = 0 THEN 0
+    ELSE salary
+END AS bonus
+FROM Employees
+ORDER BY employee_id
