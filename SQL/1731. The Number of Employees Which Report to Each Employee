@@ -1,0 +1,14 @@
+/*
+  Really need to keep track of which data you
+  want in a self join
+*/
+
+# Write your MySQL query statement below
+SELECT A.employee_id, A.name, 
+    COUNT(B.reports_to) AS reports_count, 
+    ROUND(AVG(B.age)) AS average_age
+FROM Employees AS A
+JOIN Employees AS B
+WHERE B.reports_to = A.employee_id
+GROUP BY B.reports_to
+ORDER BY A.employee_id
