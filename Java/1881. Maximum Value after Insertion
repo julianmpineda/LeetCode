@@ -1,0 +1,34 @@
+/*
+  Just make sure to start the negative loop
+  from 1 to skip the sign. since the loops will
+  return if the proper place is found, the final
+  append is only reached if x belongs at the end.
+*/
+
+class Solution {
+    public String maxValue(String n, int x) {
+        boolean neg = (n.charAt(0) == '-');
+        StringBuilder max = new StringBuilder(n);
+        char[] num = n.toCharArray();
+        
+        if (!neg) {
+            for (int i = 0; i < num.length; i++) {
+                if ((int)num[i] - 48 < x) {
+                    max.insert(i, x);
+                    return max.toString();
+                }
+            }
+        } else {
+            for (int j = 1; j < num.length; j++) {
+                if ((int)num[j] - 48 > x) {
+                    max.insert(j, x);
+                    return max.toString();
+                }
+            }
+        }
+
+        max.append(x);
+
+        return max.toString();
+    }
+}
