@@ -1,0 +1,25 @@
+/*
+  Third iteration of this program. First one I was doing
+  too much and trying to preempt by checking for edge cases
+  where the number was already odd or every substring was even.
+
+  Second used a boolean and StringBuilder to build a return string,
+  it works but with a bit more memory and runtime overhead.
+
+  This is the simplest and also fastest way to solve it.
+*/
+
+class Solution {
+    public String largestOddNumber(String num) {
+        int count = num.length() - 1;
+
+        while (count >= 0) {
+            if (num.charAt(count) % 2 == 1) {
+                return num.substring(0, count + 1);
+            }
+            count--;
+        }
+
+        return "";
+    }
+}
