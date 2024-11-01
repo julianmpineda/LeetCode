@@ -1,0 +1,20 @@
+/*
+  First wrote a recursive stringBuilder solution,
+  but given the relatively low constraints on input
+  size, a straight while loop was faster, even using
+  string concatenation.
+*/
+
+
+class Solution {
+    public String removeOccurrences(String s, String part) {
+        int pLen = part.length();
+        
+        while (s.contains(part)) {
+            int index = s.indexOf(part);
+            s = s.substring(0, index) + s.substring(index + pLen);
+        }
+
+        return s;
+    }
+}
