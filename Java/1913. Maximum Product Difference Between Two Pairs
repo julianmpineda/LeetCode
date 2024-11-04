@@ -1,0 +1,31 @@
+/*
+  Two versions, the faster but more involved hardcoded brute force on top,
+  the slower built in function one commented out on the bottom.
+*/
+
+class Solution {
+    public int maxProductDifference(int[] nums) {
+
+        int maxOne = 0, maxTwo = 0, minOne = 100000, minTwo = 100000;
+
+        for (int n : nums) {
+            if (n > maxOne) {
+                maxTwo = maxOne;
+                maxOne = n;
+            } else if (n > maxTwo) {
+                maxTwo = n;
+            } 
+            if (n < minOne) {
+                minTwo = minOne;
+                minOne = n;
+            } else if (n < minTwo) {
+                minTwo = n;
+            }
+        }
+
+        return maxOne * maxTwo - minOne * minTwo;
+
+        //Arrays.sort(nums);
+        //return (nums[nums.length-1] * nums[nums.length - 2]) - (nums[0] * nums[1]);
+    }
+}
