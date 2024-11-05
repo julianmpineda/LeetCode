@@ -1,0 +1,29 @@
+/*
+  HashMap might have created less overhead vs an array
+  the less distinct letters there are, but it's hard to
+  beat the simplicity of an array given a smallish
+  known max size.
+*/
+
+class Solution {
+    public boolean areOccurrencesEqual(String s) {
+        int[] alpha = new int[26];
+        int max = -1;
+
+        for (char c : s.toCharArray()) {
+            alpha[c - 'a']++;
+        }
+
+        for (int i : alpha) {
+            if (i != 0) {
+                if (max == -1) {
+                    max = i;
+                }
+                if (i != max) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+}
