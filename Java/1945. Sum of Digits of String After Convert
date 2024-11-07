@@ -1,0 +1,25 @@
+/*
+  Lot of type conversion is probably not the best way
+  to do it, since it can be ambiguous.
+*/
+
+class Solution {
+    public int getLucky(String s, int k) {
+        StringBuilder sInt = new StringBuilder();
+
+        for (char c : s.toCharArray()) {
+            sInt.append(c - 96);
+        }
+
+        for (int i = 0; i < k; i++) {
+            int sum = 0;
+            for (char x : sInt.toString().toCharArray()) {
+                sum += (x - 48);
+            }
+            sInt.setLength(0);
+            sInt.append(sum);
+        }
+
+        return Integer.parseInt(sInt.toString());
+    }
+}
