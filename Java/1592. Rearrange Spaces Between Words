@@ -1,0 +1,48 @@
+/*
+  The next way to optimize for speed would be to replace
+  the .trim() or split with a coded function, but it might save
+  1-2s over the entire test set.
+*/
+
+class Solution {
+    public String reorderSpaces(String text) {
+        int spaces = 0;
+        String[] words = text.trim().split("\\s+");
+
+        for (char c : text.toCharArray()) {
+            if (c == ' ') {
+                spaces++;
+            }
+        }
+        
+        if (spaces == 0) {
+            return text;
+        }
+
+        int endNum = spaces, btwNum = 0;
+
+        if (words.length != 1) {
+            endNum = spaces % (words.length - 1);
+            btwNum = (spaces - endNum) / (words.length - 1);
+        }
+
+        StringBuilder retStr = new StringBuilder();
+
+        for (int i = 0; i < words.length; i++) {
+            retStr.append(words[i]);
+            int num = 0;
+
+            if (i != words.length - 1) {
+                num = btwNum;
+            } else {
+                num = endNum;
+            }
+
+            for (int j = 0; j < num; j++) {
+                retStr.append(" ");
+            }
+        }
+
+        return retStr.toString();
+    }
+}
