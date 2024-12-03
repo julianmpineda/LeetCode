@@ -1,0 +1,45 @@
+/*
+  Commented version was the first draft, using a loop
+  to count it for every potential X. The final version 
+  was written after reading the faster version. Using
+  Math.min() to prevent index out of bounds exceptions
+  was an interesting use.
+*/
+
+class Solution {
+    public int specialArray(int[] nums) {
+        int larger = 0;
+        int[] numx = new int[nums.length + 1];
+
+        for (int x : nums) {
+            numx[Math.min(x, nums.length)]++;
+        }
+
+        for (int i = nums.length; i >= 0; i--) {
+            larger += numx[i];
+            if (larger == i) {
+                return i;
+            }
+        }
+        
+        /* Original first method
+
+        int x = nums.length, special; 
+
+        for (int i = 0; i <= x; i++) {
+            special = 0;
+            for (int j : nums) {
+                special += (j >= i) ? 1 : 0;
+                if (special > i) {
+                    break;
+                }
+            }
+            if (special == i) {
+                return special;
+            }
+        }
+        */ end first method
+
+        return -1;
+    }
+}
