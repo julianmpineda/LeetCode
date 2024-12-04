@@ -1,0 +1,32 @@
+/*
+  Prefer this over the solution that uses an array
+  (10^4 is the max pings per constraints). Feels a bit nicer to 
+  "clean up" the list, even if it technically may require
+  more space due to the data type. Remove vs Ignore doesn't 
+  seem to matter computation wise either over as small a set.
+*/
+
+class RecentCounter {
+    private List<Integer> times;
+
+    public RecentCounter() {
+        times = new ArrayList<>();
+    }
+    
+    public int ping(int t) {
+        int range = t - 3000;
+        times.add(t);
+
+        while (times.get(0) < range) {
+            times.remove(0);
+        }
+
+        return times.size();
+    }
+}
+
+/**
+ * Your RecentCounter object will be instantiated and called as such:
+ * RecentCounter obj = new RecentCounter();
+ * int param_1 = obj.ping(t);
+ */
