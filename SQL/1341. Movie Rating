@@ -1,0 +1,31 @@
+/*
+  Messy and convoluted, I don't think any real
+  query like this would exist in the real world.
+  Good practice for manipulating data and temp
+  tables.
+*/
+
+# Write your MySQL query statement below
+
+(SELECT t.name AS results
+FROM (
+    SELECT u.name, COUNT(r.user_id) AS reviews 
+    FROM Users AS u
+    JOIN MovieRating as r
+    ON r.user_id = u.user_id
+    GROUP BY u.user_id
+    ORDER BY reviews DESC, u.name ASC) AS t
+LIMIT 1)
+
+UNION ALL
+
+(SELECT t.title AS results
+FROM (
+    SELECT m.title, AVG(r.rating) AS rating
+    FROM Movies AS m
+    JOIN MovieRating AS r
+    ON m.movie_id = r.movie_id
+    WHERE r.created_at BETWEEN '2020-02-01' AND '2020-02-29'
+    GROUP BY m.movie_id
+    ORDER BY rating DESC, m.title ASC) AS t
+LIMIT 1)
