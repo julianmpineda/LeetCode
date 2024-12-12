@@ -1,0 +1,41 @@
+/*
+  Maybe not the cleanest solution, but a
+  rare appearance from a do-while loop that I 
+  wanted to keep.
+*/ 
+
+class Solution {
+    public boolean isHappy(int n) {
+        
+        if (n == 1) {
+            return true;
+        }
+
+        Set<Integer> loop = new HashSet<>();
+        loop.add(n);
+
+        int sum = n;
+
+        do {
+            sum = square(sum);
+            if (loop.contains(sum)) {
+                return (sum % 10 == 1);
+            } else {
+                loop.add(sum);
+            }
+        } while(sum != 1);
+        
+        return true;
+    }
+
+    private int square(int num) {
+        int sum = 0;
+
+        while (num > 0) {
+            sum += Math.pow((num % 10), 2);
+            num /= 10;
+        }
+
+        return sum;
+    }
+}
