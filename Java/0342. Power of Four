@@ -1,0 +1,29 @@
+/*
+  Perhaps against the spirit of the idea,
+  but in order to achieve without loops or
+  recursion, this is the easiest way since int
+  can only hold up to 4^15. Otherwise we can
+  do some kind of bit matching since the 1 bit will
+  always be in an even position.
+*/
+
+class Solution {
+    public boolean isPowerOfFour(int n) {
+
+        if (n <= 0) {
+            return false;
+        }
+        
+        if (n == 1 || n == 4 || n == 16 || n == 64) {
+            return true;
+        } else if (n == 256 || n == 1024 || n == 4096 || n == 16384) {
+            return true;
+        } else if (n == 65536 || n == 262144 || n == 1048576 || n == 4194304) {
+            return true;
+        } else if (n == 16777216 || n == 67108864 || n == 268435456 || n == 1073741824) {
+            return true;
+        }
+
+        return false;
+    }
+}
