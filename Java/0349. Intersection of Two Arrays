@@ -1,0 +1,34 @@
+/*
+  Initial one made an array for both, then compared them
+  and added the intersection to a set, then converted to an array.
+  Realized you could skip that 3rd step and just build the 
+  intersection set with the first. Arrays end up with unecessary time since
+  worst case it has to look through 1001 elements.
+*/
+
+class Solution {
+    public int[] intersection(int[] nums1, int[] nums2) {
+        int count = 0;
+        Set<Integer> one = new HashSet<>();
+        Set<Integer> cross = new HashSet<>();
+
+        for (int o : nums1) {
+            one.add(o);
+        }
+
+        for (int t : nums2) {
+            if (one.contains(t)) {
+                cross.add(t);
+            }
+        }
+
+        int[] inter = new int[cross.size()];
+
+        for (int x : cross) {
+            inter[count] = x;
+            count++;
+        }
+
+        return inter;
+    }
+}
