@@ -1,0 +1,41 @@
+/*
+  Created from my initial code from 0349. Had converted both sets
+  to HashMaps, which worked, but switching to an array for the 
+  "one" list proved to have significant gains in runtime. The 
+  additional space is negligible, but the array allows us to 
+  access it much faster and the code ignores any numbers that don't
+  intersect, meaning no time is wasted checking non-intersecting numbers. 
+*/
+
+class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+        int count = 0, total = 0;
+        int[] one = new int[1001];
+        Map<Integer, Integer> cross = new HashMap<>();
+
+        for (int o : nums1) {
+            one[o]++;
+        }
+
+        for (int t : nums2) {
+            if (one[t] > 0) {
+                cross.put(t, cross.getOrDefault(t, 0) + 1);
+                if (cross.get(t) <= one[t]) {
+                    total++;
+                }
+            }
+        }
+
+        int[] inter = new int[total];
+
+        for (int y : cross.keySet()) {
+            int num = Math.min(cross.get(y), one[y]);
+            for (int i = 0; i < num; i++) {
+                inter[count] = y;
+                count++;
+            }
+        }
+
+        return inter;
+    }
+}
