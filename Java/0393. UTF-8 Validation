@@ -1,0 +1,59 @@
+/*
+  Not the most efficient way, which would include bit shifting,
+  but very readable. Could potentially do away with the first loop
+  and convert "in place", and also do more prevalidation on the first
+  String array to weed out some length related issues.
+*/
+
+class Solution {
+    public boolean validUtf8(int[] data) {
+
+        int bytes = 0, count = 0;
+        String[] bin = new String[data.length];
+
+        for (int i = 0; i < data.length; i++) {
+            bin[i] = binary(data[i]);
+        }
+
+        while (count < data.length) {
+            bytes = bin[count].indexOf('0');
+
+            if (bytes == 0) {
+                count++;
+                continue;
+            } else if (bytes == -1 || bytes == 1 || bytes > 4) {
+                return false;
+            }
+
+            if (count + bytes > data.length) {
+                return false;
+            }
+
+            count++;
+
+            for (int i = 1; i < bytes; i++) {
+                if (bin[count].charAt(0) == '1' && bin[count].charAt(1) == '0') {
+                    count++;
+                } else {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    private String binary(int x) {
+        
+        String binary = Integer.toBinaryString(x);
+        StringBuilder eightBin = new StringBuilder();
+
+        for (int i = 0; i < 8-binary.length(); i++) {
+            eightBin.append('0');
+        }
+
+        eightBin.append(binary);
+
+        return eightBin.toString();
+    }
+}
