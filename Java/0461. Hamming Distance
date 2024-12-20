@@ -1,0 +1,25 @@
+/*
+  Quick 2 versions. The first is the built in function
+  1-line version. The other is the intended bit shift
+  version.
+*/
+
+class Solution {
+    public int hammingDistance(int x, int y) {
+        
+        return Integer.bitCount(x ^ y);
+
+        /*
+        int z = x ^ y; 
+        int sum = 0;
+
+        while (z != 0) {
+            if ((z & 1) == 1) {
+                sum++;
+            }
+            z = z >> 1;
+        }
+        return sum;
+        */
+    }
+}
