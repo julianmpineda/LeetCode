@@ -1,0 +1,34 @@
+/*
+  Coincidentally, a simpler version of the code I'm working on for Advent2024. 
+  Still having plumbing work done at home, so taking a quick break from AoC to do
+  some smaller codes, but can't escape it.
+
+  Since it's guaranteed 1 island, only need to keep it a single int for the perimeter.
+  This gives me some ideas for AoC though, to do it more recursively or with some pathing
+  to break it down into more "islands" VS by key
+*/
+
+class Solution {
+    public int islandPerimeter(int[][] grid) {
+
+        int perimeter = 0;
+        
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+
+                if (grid[i][j] == 1) {
+                    perimeter += 4;
+                }
+
+                if (i > 0 && grid[i][j] == 1 && grid[i][j] == grid[i - 1][j]) {
+                    perimeter -= 2;
+                }
+                if (j > 0 && grid[i][j] == 1 && grid[i][j] == grid[i][j - 1]) {
+                    perimeter -= 2;
+                }
+            }
+        }
+
+        return perimeter;
+    }
+}
