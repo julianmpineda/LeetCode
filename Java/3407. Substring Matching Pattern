@@ -1,0 +1,31 @@
+/*
+  Lot of declarations, setting up for only a few lines of 
+  actual code. 2 edge cases: 
+  - p = "*" which matches all strings.
+  - p = "x*" OR "*x" which only needs to match one substring.
+  Doesn't really save time or code length with the testcases given 
+  to account for the second edge case separately since String.substring() 
+  will return an empty string so both can be matched.
+*/
+
+class Solution {
+    public boolean hasMatch(String s, String p) {
+
+        if (p.equals("*")) {
+            return true;
+        }
+
+        int ind = p.indexOf("*");
+        String p1 = p.substring(0, ind);
+        String p2 = p.substring(ind + 1);
+
+        if (s.contains(p1)) {
+            int p1Ind = s.indexOf(p1) + p1.length();
+            if (s.substring(p1Ind).contains(p2)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}
