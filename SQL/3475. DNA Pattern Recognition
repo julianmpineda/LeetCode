@@ -1,0 +1,18 @@
+/*
+  A lesson to always check the code before questioning the logic.
+  Went on a deep dive on the "has_stop" statement thinking it didn't
+  work, trying regexp, different conditions, different formatting, etc.
+  Realized eventually that I forgot to type the 0 after ELSE, which is
+  why I was getting an error.
+*/
+
+# Write your MySQL query statement below
+SELECT sample_id, dna_sequence, species, 
+    CASE WHEN dna_sequence LIKE "ATG%" THEN 1 ELSE 0 END AS has_start, 
+    CASE WHEN dna_sequence LIKE "%TAA" 
+        OR dna_sequence LIKE "%TAG" 
+        OR dna_sequence LIKE "%TGA" THEN 1 ELSE 0 END AS has_stop, 
+    CASE WHEN dna_sequence LIKE "%ATAT%" THEN 1 ELSE 0 END AS has_atat, 
+    CASE WHEN dna_sequence LIKE "%GGG%" THEN 1 ELSE 0 END AS has_ggg
+FROM Samples
+ORDER BY sample_id
