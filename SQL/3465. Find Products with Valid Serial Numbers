@@ -1,0 +1,10 @@
+/*
+  More regex and double escape fun. This time learning about
+  word boundaries, and also properly using character classes
+*/
+
+# Write your MySQL query statement below
+SELECT product_id, product_name, description
+FROM products
+WHERE description REGEXP '\\bSN[:digit:]{4}-[:digit:]{4}\\b'
+ORDER BY product_id
