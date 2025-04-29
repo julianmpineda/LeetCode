@@ -1,0 +1,26 @@
+/*
+  Some very annoying test cases that make this more
+  convoluted than it needs to be, particuarly having to
+  deal with zero and negative numbers, which should
+  be pre-validated outside of the function, but this is
+  leetcode, not real life.
+*/
+
+CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
+BEGIN
+  DECLARE M INT;
+  SET M = ABS(N - 1);
+  RETURN (
+      # Write your MySQL query statement below.
+      SELECT 
+        CASE
+            WHEN N > 0 THEN 
+                LEAD(salary, M, null) 
+                OVER(ORDER BY salary DESC)
+            ELSE null
+            END
+      FROM Employee
+      GROUP BY salary
+      LIMIT 1
+  );
+  END
