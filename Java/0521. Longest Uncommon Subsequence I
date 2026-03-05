@@ -1,0 +1,12 @@
+class Solution {
+    public int findLUSlength(String a, String b) {
+
+        // If a and b are the same, there is no uncommon subsequence.
+        if (a.equals(b)) {
+            return -1;
+        }
+
+        // If they are different, the longest string is the uncommon subsequence.
+        return Math.max(a.length(), b.length());
+    }
+}
