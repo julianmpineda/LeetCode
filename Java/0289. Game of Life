@@ -1,0 +1,39 @@
+class Solution {
+    public void gameOfLife(int[][] board) {
+        int width = board[0].length, height = board.length;
+        int[][] temp = new int[height+2][width+2];
+
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                temp[i+1][j+1] = board[i][j];
+            }
+        }
+
+        for (int y = 1; y <= height; y++) {
+            for (int x = 1; x <= width; x++) {
+                int count = 0;
+
+                count += temp[y-1][x-1];
+                count += temp[y-1][x];
+                count += temp[y-1][x+1];
+                count += temp[y][x-1];
+                count += temp[y][x+1];
+                count += temp[y+1][x-1];
+                count += temp[y+1][x];
+                count += temp[y+1][x+1];
+
+                if (temp[y][x] == 1) {
+                    if (count < 2) {
+                        board[y-1][x-1] = 0;
+                    } else if (count > 3) {
+                        board[y-1][x-1] = 0;
+                    }
+                } else {
+                    if (count == 3) {
+                        board[y-1][x-1] = 1;
+                    }
+                }
+            }
+        }
+    }
+}
