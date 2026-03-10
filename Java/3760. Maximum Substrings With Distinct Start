@@ -1,0 +1,28 @@
+class Solution {
+    public int maxDistinct(String s) {
+
+        int[] alpha = new int[26];
+
+        for (char c : s.toCharArray()) {
+            alpha[c - 'a']++;
+        }
+
+        int count = 0;
+
+        for (int i : alpha) {
+            count += i > 0 ? 1 : 0;
+        }
+
+        return count;
+
+        /*
+        Set<Character> count = new HashSet<>();
+
+        for (char c : s.toCharArray()) {
+            count.add(c);
+        }
+
+        return count.size();
+        */
+    }
+}
