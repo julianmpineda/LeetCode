@@ -1,0 +1,13 @@
+class Solution {
+    public List<Integer> findWordsContaining(String[] words, char x) {
+        List<Integer> index = new ArrayList<>();
+
+        for (int w  = 0; w < words.length; w++) {
+            if (words[w].indexOf(x) >= 0) {
+                index.add(w);
+            }
+        }
+
+        return index;
+    }
+}
