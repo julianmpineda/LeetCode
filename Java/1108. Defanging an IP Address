@@ -1,0 +1,23 @@
+class Solution {
+    public String defangIPaddr(String address) {
+
+        StringBuilder dfip = new StringBuilder();
+
+        for (int i = 0; i < address.length(); i++) {
+            char c = address.charAt(i);
+
+            if (c == '.') {
+                dfip.append("[.]");
+            } else {
+                dfip.append(c);
+            }
+        }
+
+        return dfip.toString();
+
+        /*
+        address = address.replace(".", "[.]");
+        return address;
+        */
+    }
+}
