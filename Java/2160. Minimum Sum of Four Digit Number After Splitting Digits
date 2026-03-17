@@ -1,0 +1,16 @@
+class Solution {
+    public int minimumSum(int num) {
+        int[] split = new int[4];
+
+        for (int i = 3; i >= 0; i--) {
+            split[i] = num % 10;
+            num /= 10;
+        }
+
+        Arrays.sort(split);
+        int one = (split[0] * 10) + split[3];
+        int two = (split[1] * 10) + split[2];
+
+        return one + two;   
+    }
+}
