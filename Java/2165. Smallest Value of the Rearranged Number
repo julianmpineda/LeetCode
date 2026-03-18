@@ -1,0 +1,54 @@
+class Solution {
+    public long smallestNumber(long num) {
+
+        if (num < 10 && num > -12) {
+            return num;
+        }
+
+        boolean neg = num < 0;
+        int[] digits = new int[10];
+        num = Math.abs(num);
+
+        while (num > 0) {
+            long x = num % 10;
+            digits[(int)x]++;
+            num /= 10;
+        }
+
+        long ans = 0L;
+
+        if (!neg) {
+            if (digits[0] > 0) {
+                int count = 1, min = -1;
+
+                while (count < 10) {
+                    if (digits[count] > 0) {
+                        ans += count;
+                        digits[count]--;
+                        break;
+                    }
+                    count++;
+                }
+            }
+
+            for (int p = 0; p < 10; p++) {
+                while (digits[p] > 0) {
+                    ans = (ans * 10) + p;
+                    digits[p]--;
+                }
+            }
+
+        } else {
+            for (int n = 9; n >=0; n--) {
+                while (digits[n] > 0) {
+                    ans = (ans * 10) + n;
+                    digits[n]--;
+                }
+            }
+
+            ans *= -1;
+        }
+
+        return ans;
+    }
+}
