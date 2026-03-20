@@ -1,0 +1,14 @@
+class Solution {
+    public long[] sumOfThree(long num) {
+
+        if (num % 3 != 0) {
+            return new long[]{};
+        }
+
+        long y = num/3;
+        long x = y - 1;
+        long z = y + 1;
+
+        return new long[]{x, y, z};
+    }
+}
