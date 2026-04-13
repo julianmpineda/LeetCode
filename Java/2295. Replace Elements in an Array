@@ -1,0 +1,22 @@
+class Solution {
+    public int[] arrayChange(int[] nums, int[][] operations) {
+        Map<Integer, Integer> rep = new HashMap<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            rep.put(nums[i], i);
+        }
+
+        for (int j = 0; j < operations.length; j++) {
+            rep.put(operations[j][1], rep.get(operations[j][0]));
+            rep.remove(operations[j][0]);
+        }
+
+        int[] ans = new int[nums.length];
+
+        for (int i : rep.keySet()) {
+            ans[number.get(i)] = i;
+        }
+
+        return ans;
+    }
+}
