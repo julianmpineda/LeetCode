@@ -1,0 +1,33 @@
+class Solution {
+    public String greatestLetter(String s) {
+
+        for (char c = 'Z'; c >= 'A'; c--) {
+            if ((s.indexOf(c) >= 0) && (s.indexOf(Character.toLowerCase(c)) >= 0)) {
+                return String.valueOf(c);
+            }
+        }
+
+        return "";
+
+        /*
+        int[] upper = new int[26];
+        int[] lower = new int[26];
+
+        for (char c : s.toCharArray()) {
+            if (Character.isUpperCase(c)) {
+                upper[c - 'A']++;
+            } else {
+                lower[c - 'a']++;
+            }
+        }
+
+        for (int i = 25; i > -1; i--) {
+            if (upper[i] > 0 && lower[i] > 0) {
+                return ((char)('A' + i)) + "";
+            }
+        }
+
+        return "";
+        */
+    }
+}
