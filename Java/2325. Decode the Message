@@ -1,0 +1,66 @@
+class Solution {
+    public String decodeMessage(String key, String message) {
+
+        int[] cipher = new int[26];
+        Arrays.fill(cipher, -1);
+        int count = 0;
+
+        for (char c : key.toCharArray()) {
+            if (count == 26) {
+                break;
+            } else if (c != ' ' && cipher[c - 'a'] == -1) {
+                cipher[c - 'a'] = count;
+                count++;
+            }
+        }
+
+        StringBuilder decoded = new StringBuilder();
+
+        for (char d : message.toCharArray()) {
+            if (d == ' ') {
+                decoded.append(' ');
+            } else {
+                decoded.append((char)(cipher[d - 'a'] + 'a'));
+            }
+        }
+
+        return decoded.toString();
+    }
+}
+
+       /* Method 1: HashMap 
+        Map<Character, Character> cipher = new HashMap<>();
+        int count = 0;
+
+        for (char c : key.toCharArray()) {
+            if (count == 26) {
+                break;
+            }
+
+            if (c == ' ') {
+                continue;
+            }
+
+            if (!cipher.keySet().contains(c)) {
+                cipher.put(c, (char)(count + 'a'));
+                count++;
+            } 
+        }
+
+        */
+
+        /* Method 2: StringBuilder + indexOf()
+        StringBuilder cipher = new StringBuilder();
+
+        for (char c : key.toCharArray()) {
+            if (c == ' ') {
+                continue;
+            } else if (cipher.toString().indexOf(c) == -1) {
+                cipher.append(c);
+            }
+
+            if (cipher.length() == 26) {
+                break;
+            }
+        }
+        */
