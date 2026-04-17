@@ -1,0 +1,31 @@
+class SmallestInfiniteSet {
+
+    Set<Integer> removed;
+
+    public SmallestInfiniteSet() {
+        removed = new HashSet<>();
+    }
+    
+    public int popSmallest() {
+
+        int count = 1;
+        
+        while (removed.contains(count)) {
+            count++;
+        }
+            
+        removed.add(count);
+        return count;
+    }
+    
+    public void addBack(int num) {
+        removed.remove(num);
+    }
+}
+
+/**
+ * Your SmallestInfiniteSet object will be instantiated and called as such:
+ * SmallestInfiniteSet obj = new SmallestInfiniteSet();
+ * int param_1 = obj.popSmallest();
+ * obj.addBack(num);
+ */
