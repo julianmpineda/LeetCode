@@ -1,0 +1,47 @@
+class Solution {
+    public boolean canChange(String start, String target) {
+        StringBuilder tempS = new StringBuilder();
+        StringBuilder tempT = new StringBuilder();
+        List<Integer> sPos = new ArrayList();
+        List<Integer> tPos = new ArrayList();
+        int count = 0;
+        
+        for (int i = 0; i < start.length(); i++) {
+            char s = start.charAt(i);
+
+            if (s == 'L' || s == 'R') {
+                tempS.append(s);
+                sPos.add(i);
+            }
+
+            char t = target.charAt(i);
+
+            if (t == 'L' || t == 'R') {
+                tempT.append(t);
+                tPos.add(i);
+            }
+        }
+
+        if (!tempS.toString().equals(tempT.toString())) {
+            return false;
+        }
+
+        for (int j = 0; j < tempS.length(); j++) {
+
+            char c = tempS.charAt(j);
+
+            if (c == 'L') {
+                if (sPos.get(j) < tPos.get(j)) {
+                    return false;
+                }
+            } else if (c == 'R') {
+                if (sPos.get(j) > tPos.get(j)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+
+    }
+}
