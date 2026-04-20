@@ -1,0 +1,24 @@
+class Solution {
+    public int[] numberOfPairs(int[] nums) {
+        int[] count = new int[101];
+
+        for (int x : nums) {
+            count[x]++;
+        }
+
+        int remain = 0, removed = 0;
+
+        for (int i = 0; i < 101; i++) {
+            if (count[i] > 0) {
+                if (count[i] % 2 == 0) {
+                    removed += count[i]/2;
+                } else {
+                    remain++;
+                    removed += (count[i] - 1)/ 2;
+                }
+            }
+        }
+
+        return new int[]{removed, remain};
+    }
+}
