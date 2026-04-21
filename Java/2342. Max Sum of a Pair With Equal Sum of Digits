@@ -1,0 +1,42 @@
+class Solution {
+    public int maximumSum(int[] nums) {
+
+        Map<Integer, int[]> sumGroups = new HashMap<>();
+
+        for (int n : nums) {
+            int sum = digitSum(n);
+            sumGroups.putIfAbsent(sum, new int[]{-1, -1});
+            int[] temp = sumGroups.get(sum);
+            
+            // Use temp[0] as the highest spot, and temp[1] as the second highest
+            if (temp[0] < n) {
+                temp[1] = temp[0];
+                temp[0] = n;
+            } else if (temp[1] <= n) {
+                temp[1] = n;
+            }
+        }
+
+        int max = -1;
+
+        for (int s : sumGroups.keySet()) {
+            int[] temp = sumGroups.get(s);
+            if (!(temp[0] == -1 || temp[1] == -1)) {
+                max = Math.max(max, temp[0] + temp[1]);
+            }
+        }
+
+        return max;
+    }
+
+    private static int digitSum(int num) {
+        int sum = 0;
+
+        while (num > 0) {
+            sum += num % 10;
+            num /= 10;
+        }
+
+        return sum;
+    }
+}
