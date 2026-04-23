@@ -1,0 +1,15 @@
+class Solution {
+    public char repeatedCharacter(String s) {
+        int[] alpha = new int[26];
+
+        for (char c : s.toCharArray()) {
+            alpha[c - 'a']++;
+
+            if (alpha[c - 'a'] == 2) {
+                return c;
+            }
+        }
+
+        return '0';
+    }
+}
