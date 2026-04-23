@@ -1,0 +1,31 @@
+class Solution {
+    public int minimumOperations(int[] nums) {
+        int[] count = new int[101];
+
+        for (int i : nums) {
+            count[i]++;
+        }
+
+        int sum = 0;
+
+        for (int j = 1; j < 101; j++) {
+            if (count[j] > 0) {
+                sum++;
+            }
+        }
+
+        return sum;
+    }
+}
+
+        /*
+        Set<Integer> count = new HashSet<>();
+
+        for (int i : nums) {
+            count.add(i);
+        }
+
+        count.remove(0);
+
+        return count.size();
+        */
