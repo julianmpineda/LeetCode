@@ -1,0 +1,23 @@
+class Solution {
+    public List<List<Integer>> mergeSimilarItems(int[][] items1, int[][] items2) {
+        int[] list = new int[1001];
+
+        for (int[] i : items1) {
+            list[i[0]] += i[1];
+        } 
+
+        for (int[] j : items2) {
+            list[j[0]] += j[1];
+        } 
+
+        List<List<Integer>> ret = new ArrayList<>();
+
+        for (int k = 1; k < 1001; k++) {
+            if (list[k] > 0) {
+                ret.add(Arrays.asList(k, list[k]));
+            }
+        }
+
+        return ret;
+    }
+}
