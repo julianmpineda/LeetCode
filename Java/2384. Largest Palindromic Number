@@ -1,0 +1,42 @@
+class Solution {
+    public String largestPalindromic(String num) {
+        int[] digit = new int[10];
+
+        for (char c : num.toCharArray()) {
+            digit[c - '0']++;
+        }
+
+        StringBuilder pal = new StringBuilder();
+        int spare = -1;
+
+        for (int i = 9; i >= 0; i--) {
+            if (digit[i] > 0) {
+                for (int j = 0; j < digit[i]/2; j++) {
+                    pal.append(i);
+                }
+
+                if (digit[i] % 2 == 1) {
+                    spare = Math.max(spare, i);
+                }
+            }
+        }
+
+        if (pal.length() == 0 || pal.charAt(0) == '0') {
+            return String.valueOf(Math.max(spare, 0));
+        }
+
+        // If it passes that if statement, then it is guaranteed repeat
+
+        StringBuilder back = new StringBuilder();
+        back.append(pal);
+        back.reverse();
+
+        if (spare >= 0) {
+            pal.append(spare);
+        }
+
+        pal.append(back);
+
+        return pal.toString();
+    }
+}
