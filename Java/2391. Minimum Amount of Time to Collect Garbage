@@ -1,0 +1,30 @@
+class Solution {
+    public int garbageCollection(String[] garbage, int[] travel) {
+        boolean metal = false, paper = false, glass = false;
+        int time = 0;
+
+        for (int i = garbage.length - 1; i > 0; i--) {
+    
+            time += garbage[i].length();
+
+            if (metal || garbage[i].contains("M")) {
+                time += travel[i-1];
+                metal = true;
+            }
+
+            if (paper || garbage[i].contains("P")) {
+                time += travel[i-1];
+                paper = true;
+            }
+
+            if (glass || garbage[i].contains("G")) {
+                time += travel[i-1];
+                glass = true;
+            }
+        }
+
+        time += garbage[0].length();
+        
+        return time;
+    }
+}
