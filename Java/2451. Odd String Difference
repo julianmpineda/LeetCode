@@ -1,0 +1,33 @@
+class Solution {
+    public String oddString(String[] words) {
+        int[] first = new int[words[0].length() - 1];
+        int count = 0, diff = -1;
+        
+        for (int i = 1; i < words[0].length(); i++) {
+            char[] w = words[0].toCharArray();
+            first[i - 1] = w[i] - w[i - 1];
+        }
+
+        for (int j = 1; j < words.length; j++) {
+            char[] w = words[j].toCharArray();
+
+            for (int k = 1; k < w.length; k++) {
+                if (first[k - 1] != w[k] - w[k - 1]) {
+                    diff = j;
+                    break;
+                }
+                count++;
+            }
+
+            if (j > 1) {
+                if (count == 0) {
+                    return words[0];
+                } else if (diff > -1) {
+                    return words[diff];
+                }
+            }
+        }
+
+        return "Error";
+    }
+}
