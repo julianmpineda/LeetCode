@@ -1,0 +1,17 @@
+class Solution {
+    public int pivotInteger(int n) {
+        int sum = (n*(n+1))/2, count = 0;
+
+        for (int i = n; i >= 0; i--) {
+            count += i;
+
+            if (count == (sum + i - count)) {
+                return i;
+            } else if (count > (sum + i - count)) {
+                return -1;
+            }
+        }
+
+        return -1;
+    }
+}
