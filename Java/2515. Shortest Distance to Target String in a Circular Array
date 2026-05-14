@@ -1,0 +1,17 @@
+class Solution {
+    public int closestTarget(String[] words, String target, int startIndex) {
+        int count = 0, posF = startIndex, posB = startIndex, n = words.length;
+
+        while (!(words[posF].equals(target) || words[posB].equals(target))) {
+            posB = (posB - 1 + n) % n;
+            posF = (posF + 1) % n;
+            count++;
+
+            if (count == n) {
+                return -1;
+            }
+        }
+
+        return count;
+    }
+}
