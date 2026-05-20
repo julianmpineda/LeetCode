@@ -1,0 +1,15 @@
+class Solution {
+    public int distinctIntegers(int n) {
+        
+        /*
+          It is always the case for n > 1 that after 1 billion days 
+          every number besides 1 will be present. Each new day n - (1 * day)
+          appears on the board. 
+          
+          If n = 1 it will be the only number present since
+          any x % 1 == 0.
+        */
+
+        return Math.max(n-1, 1);
+    }
+}
