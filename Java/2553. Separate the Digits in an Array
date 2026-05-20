@@ -1,0 +1,42 @@
+class Solution {
+    public int[] separateDigits(int[] nums) {
+        List<Integer> split = new ArrayList<>();
+
+        for (int i = nums.length -1; i >= 0 ; i--) {
+            int x = nums[i];
+            while (x > 0) {
+                split.add(x % 10);
+                x /= 10; 
+            }
+        }
+
+        int[] intSplit = new int[split.size()];
+        int ind = split.size() - 1;
+
+        for (int j = 0; j < split.size(); j++) {
+            intSplit[j] = split.get(ind);
+            ind--;
+        }
+
+        return intSplit;
+
+        /*
+
+        // Old String based approach
+
+        for (int i = 0; i < nums.length; i++) {
+            String s = String.valueOf(nums[i]);
+            for (char c : s.toCharArray()) {
+                split.add(c - '0');
+            }
+        }
+
+        int[] intSplit = new int[split.size()];
+
+        for (int j = 0; j < split.size(); j++) {
+            intSplit[j] = split.get(j);
+        }
+
+        */
+    }
+}
