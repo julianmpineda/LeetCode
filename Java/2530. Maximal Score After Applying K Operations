@@ -1,0 +1,19 @@
+class Solution {
+    public long maxKelements(int[] nums, int k) {
+        PriorityQueue<Integer> scores = new PriorityQueue<>((a,b)->Integer.compare(b,a));
+
+        for (int n : nums) {
+            scores.offer(n);
+        }
+
+        long sum = 0;
+
+        for (int i = 0; i < k; i++) {
+           int max = scores.poll();
+           scores.add((max + 2) / 3);
+           sum += max;
+        }
+
+        return sum;
+    }
+}
