@@ -1,0 +1,24 @@
+class Solution {
+    public long pickGifts(int[] gifts, int k) {
+        
+        PriorityQueue<Long> piles = new PriorityQueue<>(Comparator.reverseOrder());
+        
+        for (int g : gifts) {
+            piles.add((long) g);
+        }
+
+        for (int i = 0; i < k; i++) {
+            long max = piles.poll();
+            max = (long) Math.sqrt(max);
+            piles.add(max);
+        }
+
+        long sum = 0;
+
+        for (long p : piles) {
+            sum += p;
+        }
+
+        return sum;
+    }
+}
