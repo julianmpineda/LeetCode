@@ -1,0 +1,42 @@
+class Solution {
+    public long findTheArrayConcVal(int[] nums) {
+        StringBuilder concat = new StringBuilder();
+        
+        if (nums.length == 1) {
+            return nums[0];
+        }
+
+        int start = 0,  end = nums.length-1;
+        long sum = 0;
+        
+        while (start < end) {
+            int pad = 10;
+
+            while (nums[end] >= pad) {
+                pad *= 10;
+            }
+
+            sum += (nums[start] * pad) + nums[end];
+            start++;
+            end--;
+        }
+
+        if (start == end) {
+            sum += nums[start];
+        }
+
+        return sum;
+    }
+}
+
+/*
+        while (start < end) {
+            concat.append(String.valueOf(nums[start]));
+            concat.append(String.valueOf(nums[end]));
+            sum += Long.parseLong(concat.toString());
+            concat.setLength(0);
+            start++;
+            end--;
+        }
+    
+*/
