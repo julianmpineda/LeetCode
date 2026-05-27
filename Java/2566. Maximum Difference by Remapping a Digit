@@ -1,0 +1,25 @@
+class Solution {
+    public int minMaxDifference(int num) {
+        String numStr = String.valueOf(num);
+        char nine = 'a', zero = 'a';
+
+        for (char c : numStr.toCharArray()) {
+            if (c != '9' && nine == 'a') {
+                nine = c;
+            } 
+
+            if (c != '0' && zero == 'a') {
+                zero = c;
+            }
+
+            if (nine != 'a' && zero != 'a') {
+                break;
+            }
+        }
+
+        int numMax = Integer.parseInt(numStr.replace(nine, '9'));
+        int numMin = Integer.parseInt(numStr.replace(zero, '0'));
+
+        return numMax- numMin;
+    }
+}
