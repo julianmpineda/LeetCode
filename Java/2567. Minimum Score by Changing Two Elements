@@ -1,0 +1,12 @@
+class Solution {
+    public int minimizeSum(int[] nums) {
+        int end = nums.length - 1;
+        Arrays.sort(nums);
+
+        int sum = nums[end] - nums[2];
+        sum = Math.min(sum, nums[end - 2] - nums[0]);
+        sum = Math.min(sum, nums[end - 1] - nums[1]);
+
+        return sum;
+    }
+}
