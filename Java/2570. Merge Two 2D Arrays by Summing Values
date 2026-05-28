@@ -1,0 +1,23 @@
+class Solution {
+    public int[][] mergeArrays(int[][] nums1, int[][] nums2) {
+        Map<Integer, Integer> merged = new TreeMap<>();
+
+        for (int[] i : nums1) {
+            merged.put(i[0], i[1]);
+        }
+
+        for (int[] j : nums2) {
+            merged.put(j[0], merged.getOrDefault(j[0], 0) + j[1]);
+        }
+
+        int[][] ret = new int[merged.size()][2];
+        int count = 0;
+
+        for (int m : merged.keySet()) {
+            ret[count] = new int[]{m, merged.get(m)};
+            count++;
+        }
+
+        return ret;
+    }
+}
