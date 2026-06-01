@@ -1,0 +1,17 @@
+class Solution {
+    public int distMoney(int money, int children) {
+        int count = 0;
+        money -= children;
+
+        while (money >= 7 && count < children) {
+            money -= 7;
+            count++;
+        }
+
+        if (money < 0 || (money == 3 && count == children - 1) || (count == children && money > 0)) {
+            count--;
+        }
+
+        return count;
+    }
+}
