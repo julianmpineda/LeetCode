@@ -1,0 +1,21 @@
+class Solution {
+    public int kItemsWithMaximumSum(int numOnes, int numZeros, int numNegOnes, int k) {
+    
+        int count = 0, balls = 0;
+        
+        while (count < k) {
+            if (numOnes > 0) {
+                balls++;
+                numOnes--;
+            } else if (numZeros > 0) {
+                numZeros--;
+            } else if (numNegOnes > 0) {
+                balls--;
+                numNegOnes--;
+            }
+            count++;
+        }
+
+        return balls;
+    }
+}
