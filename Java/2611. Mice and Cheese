@@ -1,0 +1,19 @@
+class Solution {
+    public int miceAndCheese(int[] reward1, int[] reward2, int k) {
+        int[] rDiff = new int[reward1.length];
+        int rSum = 0;
+
+        for (int i = 0; i < reward1.length; i++) {
+            rDiff[i] = reward1[i] - reward2[i];
+            rSum += reward2[i];
+        }
+
+        Arrays.sort(rDiff);
+
+        for (int j = reward1.length - 1; j >= reward1.length - k; j--) {
+            rSum += rDiff[j];
+        }
+
+        return rSum;
+    }
+}
