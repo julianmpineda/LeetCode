@@ -1,0 +1,23 @@
+# Write your MySQL query statement below
+
+SELECT DISTINCT(A.num) AS ConsecutiveNums
+FROM logs AS A
+INNER JOIN logs AS B 
+    ON A.id = B.id + 1
+INNER JOIN logs AS C
+    ON A.id = C.id + 2
+WHERE A.num = B.num 
+  AND A.num = C.num
+
+
+/*
+WITH A AS (
+    SELECT id, num, LEAD(num) OVER(ORDER BY id) AS pre, LAG(num) OVER(ORDER BY id) AS post
+    FROM Logs
+)
+
+SELECT DISTINCT(num) AS ConsecutiveNums
+FROM A
+WHERE num = pre 
+AND pre = post
+*/
