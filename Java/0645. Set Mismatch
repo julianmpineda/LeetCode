@@ -1,0 +1,23 @@
+class Solution {
+    public int[] findErrorNums(int[] nums) {
+
+        int[] numbers = new int[nums.length + 1];
+        int dupe = -1;
+
+        for (int i = 0; i < nums.length; i++) {
+            numbers[nums[i]]++;
+
+            if (numbers[nums[i]] == 2) {
+                dupe = nums[i];
+            }
+        }
+
+        for (int i = 1; i < numbers.length; i++) {
+            if (numbers[i] == 0) {
+                return new int[]{dupe, i};
+            }
+        }
+
+        return new int[]{-1, -1};
+    }
+}
