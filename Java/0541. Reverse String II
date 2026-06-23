@@ -1,0 +1,33 @@
+class Solution {
+    public String reverseStr(String s, int k) {
+        StringBuilder rS = new StringBuilder();
+        int count = 0;
+
+        while (count < s.length()) {
+
+            if (count + k < s.length()) {
+                StringBuilder temp = new StringBuilder(s.substring(count, count + k));
+                rS.append(temp.reverse().toString());
+                count += k;
+            } else {
+                StringBuilder temp = new StringBuilder(s.substring(count));
+                rS.append(temp.reverse().toString());
+                count += k;
+            }
+
+            if (count >= s.length()) {
+                break;
+            }
+
+            if (count + k < s.length()) {
+                rS.append(s.substring(count, count + k));
+                count += k;
+            } else {
+                rS.append(s.substring(count));
+                count += k;
+            } 
+        }
+
+        return rS.toString();
+    }
+}
