@@ -1,0 +1,43 @@
+class Solution {
+    public String[] findRelativeRanks(int[] score) {
+        Map<Integer, Integer> place = new HashMap<>();
+        Queue<Integer> scores = new PriorityQueue<>((a, b) -> b - a);
+
+        /*
+          Store the original placement using the score as a key and 
+          use priority queue to sort the scores in ascending order.
+        */
+        for (int i = 0; i < score.length; i++) {
+            place.put(score[i], i);
+            scores.add(score[i]);
+        }
+
+        String[] ranks = new String[score.length];
+
+        /*
+          Retrieve the scores in order, the use the map to place them
+          in their original placements. Switch statement for fun.
+        */
+        for (int j = 0; j < score.length; j++) {
+            StringBuilder r = new StringBuilder();
+
+            switch(j) {
+                case 0:
+                    r.append("Gold Medal");
+                    break;
+                case 1:
+                    r.append("Silver Medal");
+                    break;
+                case 2:
+                    r.append("Bronze Medal");
+                    break;
+                default:
+                    r.append((j + 1));
+            }
+
+            ranks[place.get(scores.poll())] = r.toString();
+        }
+
+        return ranks;
+    }
+}
