@@ -1,0 +1,22 @@
+class Solution {
+    public String[] findOcurrences(String text, String first, String second) {
+        String[] s = text.split(" ");
+        List<String> third = new ArrayList<String>();
+
+        for (int i = 1; i < s.length; i++) {
+            if (s[i - 1].equals(first) && s[i].equals(second)) {
+                if ((i + 1) < s.length) {
+                    third.add(s[i + 1]);
+                }
+            }
+        }
+
+        String[] occur = new String[third.size()];
+
+        for (int j = 0; j < third.size(); j++) {
+            occur[j] = third.get(j);
+        }
+        
+        return occur;
+    }
+}
