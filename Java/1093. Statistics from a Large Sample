@@ -1,0 +1,66 @@
+class Solution {
+    public double[] sampleStats(int[] count) {
+        // Find the first occurence from the back.
+        double max = -1;
+
+        for (int i = 255; i >= 0; i--) {
+            if (count[i] > 0) {
+                max = i;
+                break;
+            }
+        }
+
+        // Find the min, mean, mode.
+        double min = -1, mean = 0, mode = -1, element = 0, countMax = 0;
+
+        for (int j = 0; j < 256; j++) {
+
+            // Use 1D to "cast" to double, or else result can overflow.
+            mean += 1D * count[j] * j;
+            element += count[j];
+
+            if (count[j] > 0 && min == -1) {
+                min = j;
+            }
+
+            if (countMax < count[j]) {
+                mode = j;
+                countMax = count[j];
+            }
+        }
+
+        mean = mean / element;
+
+        //Find median. Counts away the groups till you reach the target index.
+        double median = 0, target = Math.floor(element/2) + 1;
+        int last = 0;
+
+        for (int k = 0; k < count.length; k++) {
+            target -= count[k];
+
+            if (target <= 0) {
+                median = k;
+
+                // Add the previous number if even length.
+                if (element % 2 == 0) {
+                    // Detect if on the "edge" between two groups.
+                    if ((target + count[k] - 1) == 0) {
+                        median += last;
+                    } else {
+                        median += k;
+                    }
+
+                    median /= 2;
+                }
+                break;
+            }
+
+            // Store the value for edge cases
+            if (count[k] > 0) {
+                last = k;
+            }
+        }
+
+        return new double[]{min, max, mean, median, mode};
+    }
+}
