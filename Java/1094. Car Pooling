@@ -1,0 +1,60 @@
+class Solution {
+    public boolean carPooling(int[][] trips, int capacity) {
+
+        /* Brute force: count the number of people per section of the trip.
+           O(n^2) due to the way it iterates each trip.
+
+        int max = 0;
+
+        for (int[] t : trips) {
+            max = Math.max(t[2], max);
+        }
+
+        int[] ride = new int[max];
+
+        for (int[] i : trips) {
+            for (int j = i[1]; j < i[2]; j++) {
+                ride[j] += i[0];
+            }
+        }
+
+        for (int r : ride) {
+            if (r > capacity) {
+                return false;
+            }
+        }
+
+        return true;
+
+        /*  Optimized: instead, only mark the locations where the
+            number of passengers changes. Then iterate through
+            that and find if it goes over. Fixed O(n) time.
+
+        int max = 0;
+
+        for (int[] i : trips) {
+            max = Math.max(i[2], max);
+        }
+
+        int[] ride = new int[max + 1];
+
+        for (int[] j : trips) {
+            ride[j[1]] += j[0];
+            ride[j[2]] -= j[0];
+        }
+
+        int passengers = 0;
+
+        for (int k : ride) {
+            passengers += k;
+            if (passengers > capacity) {
+                return false;
+            }
+        }
+
+        return true;
+
+        */
+
+    }
+}
