@@ -1,0 +1,37 @@
+class Solution {
+    public int[] corpFlightBookings(int[][] bookings, int n) {
+
+        int[] change = new int[n + 1];
+
+        for (int[] b : bookings) {
+            change[b[0] - 1] += b[2];
+            change[b[1]] -= b[2];
+        }
+
+        int[] flights = new int[n];
+        int tickets = 0;
+
+        for (int i = 0; i < n; i++) {
+            tickets += change[i];
+            flights[i] += tickets;
+        }
+
+        return flights;
+
+        /*
+
+        // Brute force that is slow due to O(n^2)
+
+        int[] flights = new int[n];
+
+        for (int[] b : bookings) {
+            for (int i = b[0] - 1; i < b[1]; i++) {
+                flights[i] += b[2];
+            }
+        }
+
+        return flights;
+
+        */
+    }
+}
