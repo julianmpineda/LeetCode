@@ -1,0 +1,20 @@
+class Solution {
+    public int numEquivDominoPairs(int[][] dominoes) {
+        int len = dominoes.length, count = 0;
+
+        for (int i = 0; i < len; i++) {
+            int[] one = dominoes[i];
+
+            for (int j = i + 1; j < len; j++) {
+                int[] two = dominoes[j];
+
+                if ((one[0] == two[0] && one[1] == two[1]) ||
+                    (one[0] == two[1] && one[1] == two[0])) {
+                        count++;
+                }
+            }
+        }
+
+        return count;
+    }
+}
