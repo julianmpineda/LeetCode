@@ -1,0 +1,66 @@
+class Solution {
+    public int countCharacters(String[] words, String chars) {
+        int[] alpha = count(chars);
+        int sum = 0;
+
+        for (String w : words) {
+            int[] wCount = count(w);
+
+            if (found(wCount, alpha)) {
+                sum += w.length();
+            }
+        }
+                
+        return sum;
+    }
+
+    private static boolean found(int[] test, int[] alpha) {
+        for (int i = 0; i < 26; i++) {
+            if (alpha[i] < test[i]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private static int[] count(String word) {
+        int[] wCount = new int[26];
+
+        for (char c : word.toCharArray()) {
+            wCount[c - 'a']++;
+        }
+
+        return wCount;
+    }
+}
+
+       /* 
+            
+        //Old slow StringBuilder approach
+
+        int sum = 0;
+
+        for (String w : words) {
+            int count = 0;
+            StringBuilder s = new StringBuilder(chars);
+
+            for (String t : w.split("")) {
+                int i  = s.indexOf(t);
+
+                if (i != -1) {
+                    s.deleteCharAt(i);
+                    count++;
+                } else {
+                    break;
+                }
+
+                if (count == w.length()) {
+                    sum += w.length();
+                }
+            }
+        }
+
+        return sum;
+
+        */
