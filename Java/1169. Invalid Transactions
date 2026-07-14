@@ -1,0 +1,61 @@
+class Solution {
+
+    private static Map<String, List<String[]>> names;
+
+    public List<String> invalidTransactions(String[] transactions) {
+        names = new HashMap<>();
+        Set<Integer> invalid = new HashSet<>();
+
+        for (int i = 0; i < transactions.length; i++) {
+            String[] t = transactions[i].split(",");
+
+            if (Integer.parseInt(t[2]) > 1000) {
+                invalid.add(i);
+            }
+
+            if (names.keySet().contains(t[0])) {
+                List<Integer> indexes = find(t);
+
+                if (indexes.size() > 0) {
+                    invalid.add(i);
+
+                    for (int f : indexes) {
+                        invalid.add(f);
+                    }
+                }
+            } 
+
+            names.putIfAbsent(t[0], new ArrayList<String[]>());
+            // Name; <[Time, City, Original Index], ...>
+            names.get(t[0]).add(new String[]{t[1], t[3], String.valueOf(i)});
+        }
+
+        List<String> invalidString = new ArrayList<>();
+
+        for (int x : invalid) {
+            invalidString.add(transactions[x]);
+        }
+
+        return invalidString;
+    }
+
+    private static List<Integer> find(String[] s) {
+        List<Integer> indexes = new ArrayList<>();
+        String name = s[0], city = s[3];
+        int time = Integer.parseInt(s[1]);
+
+        for (int i = 0; i < names.get(name).size(); i++) {
+            String[] test = names.get(name).get(i);
+            
+            if (!city.equals(test[1])) {
+                int testTime = Integer.parseInt(names.get(name).get(i)[0]);
+
+                if (((testTime - 60) <= time) && (time <= (testTime + 60))) {
+                    indexes.add(Integer.parseInt(names.get(name).get(i)[2]));
+                }
+            }
+        }
+
+        return indexes;
+    }
+}
