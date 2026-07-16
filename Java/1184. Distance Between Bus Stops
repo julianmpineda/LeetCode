@@ -1,0 +1,19 @@
+class Solution {
+    public int distanceBetweenBusStops(int[] distance, int start, int destination) {
+        int n = distance.length, clock = 0, counter = 0, pos = start;
+
+        while (pos != destination) {
+            clock += distance[pos];
+            pos = (pos + 1) % n;
+        }
+
+        pos = start;
+
+        while (pos != destination) {
+            pos = (n + pos - 1) % n;
+            counter += distance[pos];
+        }
+
+        return Math.min(clock, counter);
+    }
+}
