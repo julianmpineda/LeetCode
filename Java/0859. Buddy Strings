@@ -1,0 +1,58 @@
+class Solution {
+    public boolean buddyStrings(String s, String goal) {
+        
+        // Check if the lengths are valid.
+        if (s.length() != goal.length()) {
+            return false;
+        }
+
+        // No differences, check if there are enough letters to swap.
+        if (s.equals(goal)) {
+            int[] sCount = new int[26];
+
+            for (int j = 0; j < s.length(); j++) {
+                sCount[s.charAt(j) - 'a']++;
+                if (sCount[s.charAt(j) - 'a'] == 2) {
+                    return true;
+                } 
+            }
+
+            return false;
+        }
+
+        // Checks there's 2 or less differences, and stores the indexes.
+        int one = -1, two = -1;
+      
+        for (int i = 0; i < s.length(); i++) {
+            char sChar = s.charAt(i);
+            char gChar = goal.charAt(i);
+
+            if (sChar != gChar) {
+                if (one == -1) {
+                    one = i;
+                } else if (two == -1) {
+                    two = i;
+                } else {
+                    return false;
+                }
+            }
+        }
+
+        // Only 1 difference found is always false.
+        if (one == -1 ^ two == -1) {
+            return false;
+        }
+
+        // 2 differences found.
+        if (one + two != -2) {
+            if (s.charAt(one) == goal.charAt(two) && s.charAt(two) == goal.charAt(one)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        // Theoretically unreachable with a valid dataset.
+        return false;
+    }
+}
