@@ -1,0 +1,15 @@
+class Solution {
+    public int mirrorDistance(int n) {
+        int nTemp = n, nRev = 0;
+
+        while (nTemp > 0) {
+            int ones = nTemp % 10;
+
+            nRev *= 10;
+            nRev += ones;
+            nTemp /= 10;
+        }
+
+        return Math.abs(n - nRev);
+    }
+}
