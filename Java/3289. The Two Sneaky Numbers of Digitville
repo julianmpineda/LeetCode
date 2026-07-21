@@ -1,0 +1,19 @@
+class Solution {
+    public int[] getSneakyNumbers(int[] nums) {
+        int[] count = new int[nums.length];
+        int one = -1, two = -1;
+
+        for (int n : nums) {
+            count[n]++;
+
+            if (one == -1 && count[n] > 1) {
+                one = n;
+            } else if (count[n] > 1) {
+                two = n;
+                return new int[]{one, two};
+            }
+        }
+
+        return new int[]{-1, -1};
+    }
+}
