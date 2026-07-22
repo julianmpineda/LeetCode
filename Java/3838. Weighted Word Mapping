@@ -1,0 +1,23 @@
+class Solution {
+    public String mapWordWeights(String[] words, int[] weights) {
+        StringBuilder weightStr = new StringBuilder();
+
+        for (int i = 0; i < words.length; i++) {
+            int w = findWeight(words[i], weights) % 26;
+            // Simplified: 26 - w - 1 + 'a'
+            weightStr.append((char)(122 - w));
+        }
+
+        return weightStr.toString();
+    }
+
+    private static int findWeight(String w, int[] weights) {
+        int weight = 0;
+
+        for (char c : w.toCharArray()) {
+            weight += weights[c - 'a'];
+        }
+
+        return weight;
+    }
+}
