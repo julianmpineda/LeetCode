@@ -1,0 +1,22 @@
+class Solution {
+    public boolean areNumbersAscending(String s) {
+        String[] tokens = s.split(" ");
+        int last = -1;
+
+        for (String t : tokens) {
+            if (t.length() <= 2) {
+                if (Character.isDigit(t.charAt(0))) {
+                    int x = Integer.parseInt(t);
+
+                    if (x <= last) {
+                        return false;
+                    }
+                    
+                    last = x;
+                }
+            }  
+        }
+
+        return true;
+    }
+}
