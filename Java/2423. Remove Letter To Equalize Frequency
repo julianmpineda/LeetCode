@@ -1,0 +1,76 @@
+class Solution {
+    public boolean equalFrequency(String word) {
+        int[] alpha = new int[26];
+        int count = 0;
+
+        for (char c : word.toCharArray()) {
+            alpha[c - 'a']++;
+            count++;
+        }
+
+        int one = -1, two = -1, countO = 0, countT = 0;
+
+        for (int i : alpha) {
+            count -= i;
+
+            if (i > 0) {
+                if (one == -1) {
+                    one = i;
+                    countO++;
+                } else if (one != i && two == -1) {
+                    two = i;
+                    countT++;
+                } else if (one == i) {
+                    countO++;
+                } else if (two == i) {
+                    countT++;
+                } else {
+                    // Case: "aabbbcccc" - Third(+) frequency 
+                    return false;
+                }
+            }
+
+            if (count == 0) {
+                break;
+            }
+        }
+
+        // Case: "aabb" - Single frequency
+        if (two == -1) {
+
+            // Exception Case: "abc" - All frequency 1
+            if (one == 1 && countO == word.length()) {
+                return true;
+            }
+
+            // Exception Case: "aa" - 1 letter, any removal results in 1 frequency
+            if (one == word.length()) {
+                return true;
+            }
+
+            return false;
+        }
+
+        // Case: "abbbccc" - Difference > 1 but can remove entire frequency
+        if ((one == 1 && countO == 1) || (two == 1 && countT == 1)) {
+            return true;
+        }
+
+        // Case: "aabbbb" - Frequency difference > 1
+        if (Math.abs(one - two) != 1) {
+            return false;
+        }
+
+        // Case: "aabbbccc" - Higher frequency more than 1 instance
+        if ((one < two && countT != 1) || (one > two && countO != 1)) {
+            return false;
+        }
+
+        // Case: "aabbcccddd" - Multiple of both frequencies
+        if (!(countO == 1 || countT == 1)) {
+            return false;
+        }
+
+        return true;
+    }
+}
