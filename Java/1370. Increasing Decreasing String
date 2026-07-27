@@ -1,0 +1,30 @@
+class Solution {
+    public String sortString(String s) {
+        int[] alpha = new int[26];
+        
+        for (char c : s.toCharArray()) {
+            alpha[c - 'a']++;
+        }
+
+        int count = 0, pos = 0, dir = 1;
+        StringBuilder idStr = new StringBuilder();
+
+        while (count < s.length()) {
+            // turn around if at either end;
+            if (pos == 26 || pos == -1) {
+                dir *= -1;
+                pos += dir;
+            }
+
+            if (alpha[pos] > 0) {
+                idStr.append((char)('a' + pos));
+                alpha[pos]--;
+                count++;
+            }
+
+            pos += dir;
+        }
+
+        return idStr.toString();
+    }
+}
