@@ -1,0 +1,43 @@
+class Solution {
+    public boolean lemonadeChange(int[] bills) {
+        int[] change = new int[2];
+
+        for (int i = 0; i < bills.length; i++) {
+            // Receive the $5, no change.
+            if (bills[i] == 5) {
+                change[0]++;
+
+            // Receive the $10, only possible change is $5
+            } else if (bills[i] == 10) {
+                if (change[0] > 0) {
+                    change[1]++;
+                    change[0]--;
+                } else {
+                    return false;
+                }
+
+            // Recieve $20 (no point in storing, can't do anything with it)
+            } else {
+                // Change $10 + $5
+                if (change[1] > 0) {
+                    if (change[0] > 0) {
+                        change[1]--;
+                        change[0]--;
+                    } else {
+                        return false;
+                    }
+
+                } else {
+                    // Change $5 x 3
+                    if (change[0] > 2) {
+                        change[0] -= 3;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
+}
