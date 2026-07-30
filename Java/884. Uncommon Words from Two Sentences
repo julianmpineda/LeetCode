@@ -1,0 +1,31 @@
+class Solution {
+    public String[] uncommonFromSentences(String s1, String s2) {
+        Map<String, Integer> words = new HashMap<>();
+
+        for (String s : s1.split(" ")) {
+            words.put(s, words.getOrDefault(s, 0) + 1);
+        }
+
+        for (String s : s2.split(" ")) {
+            words.put(s, words.getOrDefault(s, 0) + 1);
+        }
+
+        Set<String> singles = new HashSet<>();
+
+        for (String s : words.keySet()) {
+            if (words.get(s) == 1) {
+                singles.add(s);
+            }
+        }
+
+        String[] uncommon = new String[singles.size()];
+        int count = 0;
+
+        for (String s : singles) {
+            uncommon[count] = s;
+            count++;
+        }
+
+        return uncommon;
+    }
+}
