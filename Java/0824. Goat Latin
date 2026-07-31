@@ -1,0 +1,25 @@
+class Solution {
+    public String toGoatLatin(String sentence) {
+        StringBuilder goat = new StringBuilder();
+        StringBuilder ma = new StringBuilder("ma");
+        String vowels = "aeiouAEIOU";
+
+        for (String s : sentence.split(" ")) {
+            ma.append('a');
+
+            if (vowels.indexOf(s.charAt(0)) >= 0) {
+                goat.append(s);
+            } else {
+                goat.append(s.substring(1));
+                goat.append(s.charAt(0));
+            }
+
+            goat.append(ma.toString());
+            goat.append(' ');
+        }
+
+        goat.setLength(goat.length() - 1);
+        
+        return goat.toString();
+    }
+}
