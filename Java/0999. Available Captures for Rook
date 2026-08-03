@@ -1,0 +1,48 @@
+class Solution {
+    public int numRookCaptures(char[][] board) {
+        int rookR = 0, rookC = 0, pawns = 0;
+
+        for (int i = 0; i < 8; i++) {
+            int found = new String(board[i]).indexOf('R');
+
+            if (found != -1) {
+                rookR = i;
+                rookC = found;
+                break;
+            }
+        }
+
+        // Up
+        pawns += move(rookR, rookC, new int[]{-1, 0}, board) ? 1 : 0;
+
+        // Right
+        pawns += move(rookR, rookC, new int[]{0, 1}, board) ? 1 : 0;
+
+        // Down 
+        pawns += move(rookR, rookC, new int[]{1, 0}, board) ? 1 : 0;
+
+        // Left
+        pawns += move(rookR, rookC, new int[]{0, -1}, board) ? 1 : 0;
+        
+        return pawns;
+    }
+
+    private static boolean move(int row, int col, int[] dir, char[][] board) {
+
+        while (row > -1 && row < 8 && col > -1 && col < 8) {
+            
+            char space = board[row][col];
+
+            if (space == 'p') {
+                return true;
+            } else if (space == 'B') {
+                return false;
+            } else {
+                row += dir[0];
+                col += dir[1];
+            }
+        }
+
+        return false;
+    }
+}
