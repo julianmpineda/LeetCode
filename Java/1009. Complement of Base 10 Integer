@@ -1,0 +1,39 @@
+class Solution {
+    public int bitwiseComplement(int n) {
+        StringBuilder binFlip = new StringBuilder();
+
+        if (n == 0) {
+            return 1;
+        }
+
+        // Appending provides a reversed string, the next loop will un-reverse.
+
+        while (n > 0) {
+            int b = n % 2;
+            binFlip.append(Math.abs(b - 1));
+            n /= 2;
+        }
+
+        int binFlipDec = 0;
+
+        for (int i = 0; i < binFlip.length(); i++) {
+            binFlipDec += (binFlip.charAt(i) - '0') * Math.pow(2, i);
+        }
+
+        return binFlipDec;
+    }
+}
+
+/*
+        // Fully built-in Integer function string based method.
+
+        String nBin = Integer.toBinaryString(n);
+        StringBuilder nFlipped = new StringBuilder();
+
+        for (char c : nBin.toCharArray()) {
+            nFlipped.append(Math.abs(c - '1'));
+        }
+        
+        return Integer.valueOf(nFlipped.toString(), 2);
+
+*/
