@@ -1,0 +1,30 @@
+class Solution {
+    public int[] getNoZeroIntegers(int n) {
+        int one = 1, two = 0;
+
+        while (one < n) {
+            two = n - one;
+
+            if (noZero(one) && noZero(two)) {
+                return new int[]{one, two};
+            }
+            
+            one++;
+        }
+
+        return new int[]{-1, -1};
+    }
+
+    private static boolean noZero(int z) {
+
+        while (z > 0) {
+            if (z % 10 == 0) {
+                return false;
+            }
+
+            z /= 10;
+        }
+
+        return true;
+    }
+}
