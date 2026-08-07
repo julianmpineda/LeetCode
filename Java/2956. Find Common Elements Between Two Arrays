@@ -1,0 +1,25 @@
+class Solution {
+    public int[] findIntersectionValues(int[] nums1, int[] nums2) {
+        int[] one = new int[101];
+        int[] two = new int[101];
+
+        for (int o : nums1) {
+            one[o]++;
+        }
+
+        for (int t : nums2) {
+            two[t]++;
+        }
+
+        int ans1 = 0, ans2 = 0;
+
+        for (int i = 0; i < 101; i++) {
+            if (one[i] > 0 && two[i] > 0) {
+                ans1 += one[i];
+                ans2 += two[i];
+            }
+        }
+
+        return new int[]{ans1, ans2};
+    }
+}
