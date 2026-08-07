@@ -1,0 +1,21 @@
+class Solution {
+    public String[] sortPeople(String[] names, int[] heights) {
+        int n = names.length;
+
+        // Dummy array to sort against heights[] to preserve indexing with names[].
+        Integer[] x = new Integer[n];
+        
+        for (int i = 0; i < n; i++) {
+            x[i] = i;
+        }
+
+        Arrays.sort(x, (a, b) -> heights[b] - heights[a]);
+        String[] ordered = new String[n];
+
+        for (int j = 0; j < n; j++) {
+            ordered[j] = names[x[j]];
+        }
+        
+        return ordered;
+    }
+}
