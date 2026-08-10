@@ -1,0 +1,22 @@
+class Solution {
+    public String sortSentence(String s) {
+        String[] sSplit = s.split(" ");
+        String[] build = new String[sSplit.length];
+
+        for (String w : sSplit) {
+            int pos = w.charAt(w.length() - 1) - '0' - 1;
+            build[pos] = w.substring(0, w.length() - 1);
+        }
+
+        StringBuilder sentence = new StringBuilder();
+
+        for (String b : build) {
+            sentence.append(b);
+            sentence.append(' ');
+        }
+
+        sentence.setLength(sentence.length() - 1);
+
+        return sentence.toString(); 
+    }
+}
