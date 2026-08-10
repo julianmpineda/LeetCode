@@ -1,0 +1,28 @@
+class Solution {
+    public String firstPalindrome(String[] words) {
+        for (String w : words) {
+            int start = 0, end = w.length() - 1;
+            
+            while (start <= end) {
+                if (w.charAt(start) == w.charAt(end)) {
+                    start++;
+                    end--;
+
+                    if (start >= end) {
+                        return w;
+                    }
+                } else {
+                    break;
+                }
+            }
+        }
+
+        return "";
+    }
+}
+
+/*
+        if (w.equals(rev.reverse().toString())) {
+            return w;
+        }
+*/
