@@ -1,0 +1,24 @@
+class Solution {
+    public int numUniqueEmails(String[] emails) {
+        Set<String> valid = new HashSet<>();
+
+        for (String e : emails) {
+            int at = e.indexOf('@');
+            int plus = e.indexOf('+');
+            String local = "";
+
+            if (plus != -1 && plus < at) {
+                local = e.substring(0, plus);
+            } else {
+                local = e.substring(0, at);
+            }
+
+            local = local.replace(".", "");
+            local += e.substring(at);
+
+            valid.add(local);
+        }
+
+        return valid.size();
+    }
+}
