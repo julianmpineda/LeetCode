@@ -1,0 +1,30 @@
+class Solution {
+    public String customSortString(String order, String s) {
+        int[] freq = new int[26];
+
+        // Count frequency of chars
+        for (char c : s.toCharArray()) {
+            freq[c - 'a']++;
+        }
+
+        StringBuilder cus = new StringBuilder();
+
+        // Append in order of "order" string
+        for (char o : order.toCharArray()) {
+            while (freq[o - 'a'] > 0) {
+                cus.append(o);
+                freq[o - 'a']--;
+            }
+        }
+
+        // Append anything left, order doesn't matter
+        for (int i = 0; i < 26; i++) {
+            while (freq[i] > 0) {
+                cus.append((char)(i + 'a'));
+                freq[i]--;
+            }
+        }
+
+        return cus.toString();
+    }
+}
