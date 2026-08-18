@@ -1,0 +1,171 @@
+class Solution {
+    public boolean validTicTacToe(String[] board) {
+        int x = 0, o = 0;
+        boolean xWin = false, oWin = false;;
+
+        // Check rows
+        for (String r : board) {
+            if (r.equals("XXX")) {
+                xWin = true;
+            } else if (r.equals("OOO")) {
+                oWin = true;
+            }
+
+            for (char c : r.toCharArray()) {
+                if (c == 'X') {
+                    x++;
+                } else if (c == 'O') {
+                    o++;
+                }
+            }
+        }
+
+        // The turn order/number of 'X' and 'O' is wrong.
+        if (x - o > 1 || o > x) {
+            return false;
+        }
+
+        // Check columns
+        for (int i = 0; i < 3; i++) {
+            if (board[0].charAt(i) == board[1].charAt(i) 
+                && board[1].charAt(i) == board[2].charAt(i)) {
+
+                if (board[0].charAt(i) == 'X') {
+                    xWin = true;
+                } else if (board[0].charAt(i) == 'O') {
+                    oWin = true;
+                }
+            }
+        }
+
+        // Check diagonals
+        if (board[0].charAt(0) == board[1].charAt(1) 
+            && board[1].charAt(1) == board[2].charAt(2)) {
+
+            if (board[0].charAt(0) == 'X') {
+                xWin = true;
+            } else if (board[0].charAt(0) == 'O') {
+                oWin = true;                
+            }
+        } else if (board[0].charAt(2) == board[1].charAt(1) 
+                && board[1].charAt(1) == board[2].charAt(0)) {
+
+            if (board[0].charAt(2) == 'X') {
+                xWin = true;
+            } else if (board[0].charAt(2) == 'O') {
+                oWin = true;
+            }
+        }
+
+        // Both win, impossible.
+        if (xWin && oWin) {
+            return false;
+        } 
+        
+        // Only one wins, but the 'X', 'O' counts are wrong
+        if (xWin) {
+            if (x == o) {
+                return false;
+            }
+        } else if (oWin) {
+            if (x > o) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
+
+/*
+      class Solution {
+        public boolean validTicTacToe(String[] board) {
+    
+        /*
+            Following this line structure:
+    
+                111  456  7.8
+                222  456  .7.
+                333  456  8.7
+    
+            Variables for one, two, three omitted for board[0-2].
+        */
+
+            int x = 0, o = 0;
+            boolean xWin = false, oWin = false;;
+    
+            for (String r : board) {
+               // System.out.println(r);
+                if (r.equals("XXX")) {
+                    xWin = true;
+                } else if (r.equals("OOO")) {
+                    oWin = true;
+                }
+    
+                for (char c : r.toCharArray()) {
+                    if (c == 'X') {
+                        x++;
+                    } else if (c == 'O') {
+                        o++;
+                    }
+                }
+            }
+    
+            if (x - o > 1 || o > x) {
+                //System.out.println("turn order wrong");
+                return false;
+            }
+    
+            for (int i = 0; i < 3; i++) {
+    
+                if (board[0].charAt(i) == board[1].charAt(i) 
+                    && board[1].charAt(i) == board[2].charAt(i)) {
+    
+                    if (board[0].charAt(i) == 'X') {
+                        xWin = true;
+                    } else if (board[0].charAt(i) == 'O') {
+                        oWin = true;
+                    }
+                }
+            }
+    
+            StringBuilder temp = new StringBuilder();
+    
+            temp.append(board[0].charAt(0));
+            temp.append(board[1].charAt(1));
+            temp.append(board[2].charAt(2));
+    
+            String seven = temp.toString();
+    
+            temp.setLength(0);
+            temp.append(board[0].charAt(2));
+            temp.append(board[1].charAt(1));
+            temp.append(board[2].charAt(0));
+    
+            String eight = temp.toString();
+    
+            if (seven.equals("XXX") || eight.equals("XXX")) {
+                xWin = true;
+            } else if (seven.equals("OOO") || eight.equals("OOO")) {
+                oWin = true;
+            }
+    
+            if (xWin && oWin) {
+               // System.out.println("Both win");
+                return false;
+            } else if (xWin) {
+                if (x == o) {
+                    //System.out.println("xWin, too many o");
+                    return false;
+                }
+            } else if (oWin) {
+                if (x > o) {
+                    //System.out.println("oWin, too many X");
+                    return false;
+                }
+            }
+    
+            return true;
+        }
+    }
+*/
