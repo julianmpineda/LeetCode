@@ -1,0 +1,34 @@
+class Solution {
+    public boolean rotateString(String s, String goal) {
+
+        if (s.length() != goal.length()) {
+            return false;
+        }
+
+        StringBuilder str = new StringBuilder(s);
+        int count = 0;
+
+        while (count < s.length()) {
+            char c = str.charAt(0);
+            str.deleteCharAt(0);
+            str.append(c);
+            count++;
+
+            if (str.toString().equals(goal)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}
+
+    /*
+        String str = s + s;
+
+        if (str.contains(goal)) {
+            return true;
+        } else {
+            return false;
+        }
+    */
