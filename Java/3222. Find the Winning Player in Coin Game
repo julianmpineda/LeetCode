@@ -1,0 +1,29 @@
+class Solution {
+    public String winningPlayer(int x, int y) {
+        int turns = Math.min(x, y/4);
+        
+        if (turns % 2 == 0) {
+            return "Bob";
+        } else {
+            return "Alice";
+        }
+    }
+}
+
+/*  
+        // Simulated Brute Force method
+
+        int player = 1;
+        
+        while ((x >= 1) && (y >= 4)) {
+            x--;
+            y -= 4;
+            player *= -1;
+        }
+
+        if (player > 0) {
+            return "Bob";
+        } else {
+            return "Alice";
+        }
+*/
