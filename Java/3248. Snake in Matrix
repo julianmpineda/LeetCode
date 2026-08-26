@@ -1,0 +1,24 @@
+class Solution {
+    public int finalPositionOfSnake(int n, List<String> commands) {
+        int pos = 0;
+
+        for (String s : commands) {
+            switch (s.charAt(0)) {
+                case 'U':
+                    pos -= n;
+                    break;
+                case 'R':
+                    pos++;
+                    break;
+                case 'D':
+                    pos += n;
+                    break;
+                case 'L':
+                    pos--;
+                    break;
+            }
+        }
+
+        return pos;
+    }
+}
