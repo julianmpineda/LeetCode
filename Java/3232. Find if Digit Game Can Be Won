@@ -1,0 +1,15 @@
+class Solution {
+    public boolean canAliceWin(int[] nums) {
+        int sDig = 0, dDig = 0;
+
+        for (int x : nums) {
+            if (x < 10) {
+                sDig += x;
+            } else {
+                dDig += x;
+            }
+        }
+
+        return sDig != dDig;
+    }
+}
