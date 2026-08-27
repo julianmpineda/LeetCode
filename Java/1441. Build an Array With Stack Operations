@@ -1,0 +1,26 @@
+class Solution {
+    public List<String> buildArray(int[] target, int n) {
+        List<String> commands = new ArrayList<>();
+        int pos = 0, stream = 1;
+
+        while (pos < target.length) {
+            // You always need to push to the stack.
+            commands.add("Push");
+
+            if (stream == target[pos]) {
+                pos++;
+
+            // If it's not in the target array, then pop it off.
+            } else if (stream < target[pos]) {
+                commands.add("Pop");
+            } else if (stream > target[pos]) {
+                // Impossible, if you are here you have an error.
+            }
+
+            // Either way, the stream increases.
+            stream++;
+        }
+
+        return commands;
+    }
+}
