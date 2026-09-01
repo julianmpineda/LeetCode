@@ -1,0 +1,32 @@
+class Solution {
+    public int[] pivotArray(int[] nums, int pivot) {
+        int n = nums.length, pos = 0;
+        int[] pNums = new int[n];
+
+        // Place all n < pivot
+        for (int i = 0; i < n; i++) {
+            if (nums[i] < pivot) {
+                pNums[pos] = nums[i];
+                pos++;
+            }
+        }
+
+        // Place all pivots
+        for (int j = 0; j < n; j++) {
+            if (nums[j] == pivot) {
+                pNums[pos] = nums[j];
+                pos++;
+            }
+        }
+
+        // Place all n > pivot
+        for (int k = 0; k < n ; k++) {
+            if (nums[k] > pivot) {
+                pNums[pos] = nums[k];
+                pos++;
+            }
+        }
+  
+        return pNums;
+    }
+}
