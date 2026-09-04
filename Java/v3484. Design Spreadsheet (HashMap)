@@ -1,0 +1,45 @@
+class Spreadsheet {
+    Map<String, Integer> spreadsheet;
+
+    public Spreadsheet(int rows) {
+        spreadsheet = new HashMap<>();
+    }
+    
+    public void setCell(String cell, int value) {
+        spreadsheet.put(cell, value);
+    }
+    
+    public void resetCell(String cell) {
+        spreadsheet.remove(cell);
+    }
+    
+    public int getValue(String formula) {
+        int plus = formula.indexOf('+');
+        String a = formula.substring(1, plus);
+        String b = formula.substring(plus + 1);
+        
+        int x = 0, y = 0;
+
+        if (Character.isDigit(a.charAt(0))) {
+            x = Integer.parseInt(a);
+        } else {
+            x = spreadsheet.getOrDefault(a, 0);
+        }
+
+        if (Character.isDigit(b.charAt(0))) {
+            y = Integer.parseInt(b);
+        } else {
+            y = spreadsheet.getOrDefault(b, 0);
+        }
+        
+        return x + y;
+    }
+}
+
+/**
+ * Your Spreadsheet object will be instantiated and called as such:
+ * Spreadsheet obj = new Spreadsheet(rows);
+ * obj.setCell(cell,value);
+ * obj.resetCell(cell);
+ * int param_3 = obj.getValue(formula);
+ */
