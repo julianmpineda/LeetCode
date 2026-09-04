@@ -1,0 +1,53 @@
+class Spreadsheet {
+    int[][] spreadsheet;
+
+    public Spreadsheet(int rows) {
+        spreadsheet = new int[rows][26];
+    }
+    
+    public void setCell(String cell, int value) {
+        int[] rc = getCell(cell);
+        spreadsheet[rc[0]][rc[1]] = value;
+    }
+    
+    public void resetCell(String cell) {
+        int[] rc = getCell(cell);
+        spreadsheet[rc[0]][rc[1]] = 0;
+    }
+    
+    public int getValue(String formula) {
+        String a = formula.substring(1, formula.indexOf('+'));
+        String b = formula.substring(formula.indexOf('+') + 1);
+        int x = 0, y = 0;
+
+        if (Character.isDigit(a.charAt(0))) {
+            x = Integer.parseInt(a);
+        } else {
+            int[] rc = getCell(a);
+            x = spreadsheet[rc[0]][rc[1]];
+        }
+
+        if (Character.isDigit(b.charAt(0))) {
+            y = Integer.parseInt(b);
+        } else {
+            int[] rc = getCell(b);
+            y = spreadsheet[rc[0]][rc[1]];
+        }
+        return x + y;
+    }
+
+    public int[] getCell(String cell) {
+        int col = cell.charAt(0) - 'A';
+        int row = Integer.parseInt(cell.substring(1)) - 1;
+
+        return new int[]{row, col};
+    }
+}
+
+/**
+ * Your Spreadsheet object will be instantiated and called as such:
+ * Spreadsheet obj = new Spreadsheet(rows);
+ * obj.setCell(cell,value);
+ * obj.resetCell(cell);
+ * int param_3 = obj.getValue(formula);
+ */
