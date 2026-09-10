@@ -1,0 +1,27 @@
+class Solution {
+    public int countDigitOccurrences(int[] nums, int digit) {
+        int count = 0;
+
+        for (int n : nums) {
+            count += dCount(n, digit);
+        }
+
+        return count;
+    }
+
+    private int dCount(int num, int digit) {
+        int count = 0;
+
+        while (num > 0) {
+            int temp = num % 10;
+
+            if (temp == digit) {
+                count++;
+            }
+
+            num /= 10;
+        }
+
+        return count;
+    }
+}
