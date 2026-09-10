@@ -1,0 +1,30 @@
+class Solution {
+    public List<List<Integer>> findMatrix(int[] nums) {
+
+        int[] digits = new int[nums.length + 1];
+        int count = 0;
+
+        for (int i : nums) {
+            digits[i]++;
+            count++;
+        }
+
+        List<List<Integer>> matrix = new ArrayList<>();
+
+        while (count > 0) {
+            List<Integer> row = new ArrayList<>();
+
+            for (int j = 0; j < digits.length; j++) {
+                if (digits[j] > 0) {
+                    row.add(j);
+                    digits[j]--;
+                    count--;
+                }
+            }
+
+            matrix.add(new ArrayList<>(row));
+        }
+
+        return matrix;
+    }
+}
