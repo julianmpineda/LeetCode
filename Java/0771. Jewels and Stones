@@ -1,0 +1,19 @@
+class Solution {
+    public int numJewelsInStones(String jewels, String stones) {
+        int[] alpha = new int[128];
+
+        for (char j : jewels.toCharArray()) {
+            alpha[j]++;
+        }
+
+        int count = 0;
+
+        for (char s : stones.toCharArray()) {
+            if (alpha[s] > 0) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+}
