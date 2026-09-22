@@ -1,0 +1,30 @@
+class Solution {
+    public int maxFreqSum(String s) {
+        int[] letters = new int[26];
+
+        for (char c : s.toCharArray()) {
+            letters[c - 'a']++;
+        }
+
+        // aInd, eInd, iInd included for consistency.
+        int aInd = 0, eInd = 4, iInd = 8, oInd = ('o' - 'a'), uInd = ('u' - 'a'); 
+
+        int vowel = Math.max(letters[aInd], letters[eInd]);
+        vowel = Math.max(vowel, letters[iInd]);
+        vowel = Math.max(vowel, letters[oInd]);
+        vowel = Math.max(vowel, letters[uInd]);
+
+        int consonant = 0;
+
+        for (int i = 1; i < 26; i++) {
+            // We can skip aInd = 0;
+            if (i == eInd || i == iInd || i == oInd || i == uInd) {
+                continue;
+            }
+
+            consonant = Math.max(consonant, letters[i]);
+        }
+
+        return vowel + consonant;
+    }
+}
