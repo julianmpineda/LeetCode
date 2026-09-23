@@ -1,0 +1,25 @@
+class Solution {
+    public String convertDateToBinary(String date) {
+        StringBuilder binDate = new StringBuilder();
+
+        binDate.append(convert(date.substring(0, 4)));
+        binDate.append("-");
+        binDate.append(convert(date.substring(5, 7)));
+        binDate.append("-");
+        binDate.append(convert(date.substring(8)));
+
+        return binDate.toString();
+    }
+
+    private StringBuilder convert(String s) {
+        StringBuilder binary = new StringBuilder();
+        int num = Integer.parseInt(s);
+
+        while (num > 0) {
+            binary.append(num % 2);
+            num /= 2;
+        }
+
+        return binary.reverse();
+    }
+}
