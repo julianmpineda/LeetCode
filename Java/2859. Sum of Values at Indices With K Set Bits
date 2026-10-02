@@ -1,0 +1,28 @@
+class Solution {
+    public int sumIndicesWithKSetBits(List<Integer> nums, int k) {
+        int sum = 0;
+
+        for (int i = 0; i < nums.size(); i++) {
+            //if (bits(i) == k) {
+            if (Integer.bitCount(i) == k) {
+                sum += nums.get(i);
+            }
+        }
+
+        return sum;
+    }
+
+    // Unused, but if you wanted to see how it might work.
+
+    public int bits(int num) {
+        int count = 0;
+
+        while (num > 0) {
+            int bit = num % 2;
+            count += bit;
+            num /= 2;
+        }
+
+        return count;
+    }
+}
