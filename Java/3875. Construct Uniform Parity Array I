@@ -1,0 +1,14 @@
+class Solution {
+    public boolean uniformArray(int[] nums1) {
+
+        /*
+
+        If all nums1[i] are even or odd, then it is true.
+        If nums1[i] is mixed even and odd, then you can always make
+        nums2[] a fully odd array.
+
+        */
+
+        return true;
+    }
+}
