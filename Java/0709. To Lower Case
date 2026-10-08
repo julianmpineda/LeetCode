@@ -1,0 +1,16 @@
+class Solution {
+    public String toLowerCase(String s) {
+        StringBuilder strB = new StringBuilder();
+
+        for (char c : s.toCharArray()) {
+            if (c >= 'A' && c <= 'Z') {
+                c -= 'A';
+                c += 'a';
+            }
+
+            strB.append(c);
+        }
+
+        return strB.toString();
+    }
+}
