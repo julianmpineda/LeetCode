@@ -1,0 +1,27 @@
+class Solution {
+    public int[][] flipAndInvertImage(int[][] image) {
+        int len = image[0].length;
+        
+        for (int[] x : image) {
+            int start = 0, end = len - 1;
+
+            while (start < end) {
+                int hold = (x[end] + 1) % 2;
+                x[end] = (x[start] + 1) % 2;
+                x[start] = hold;
+                start++;
+                end--; 
+            }
+        }
+
+        // Flip middle bits
+        if (len % 2 == 1) {
+            int mid = len / 2;
+            for (int[] y : image) {
+                    y[mid] = (y[mid] + 1) % 2;
+            }
+        }
+
+        return image;
+    }
+}
