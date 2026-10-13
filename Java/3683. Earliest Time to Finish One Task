@@ -1,0 +1,11 @@
+class Solution {
+    public int earliestTime(int[][] tasks) {
+        int min = 100000;
+
+        for (int[] i : tasks) {
+            min = Math.min((i[0] + i[1]), min);
+        }
+
+        return min;
+    }
+}
