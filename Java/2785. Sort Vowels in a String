@@ -1,0 +1,29 @@
+class Solution {
+    public String sortVowels(String s) {
+        int[] alpha = new int[128];
+
+        for (char c : s.toCharArray()) {
+            alpha[c]++;
+        }
+
+        StringBuilder sorted = new StringBuilder();
+        char[] vowel = new char[]{'A', 'E', 'I', 'O', 'U', 'a', 'e', 'i', 'o', 'u'};
+        int v = 0;
+
+        for (char i : s.toCharArray()) {
+            if (i != 'A' && i != 'E' && i != 'I' && i != 'O' && i != 'U' &&
+                i != 'a' && i != 'e' && i != 'i' && i != 'o' && i != 'u') {
+                sorted.append(i);
+            } else {
+                while (alpha[vowel[v]] == 0) {
+                    v++;
+                }
+
+                sorted.append(vowel[v]);
+                alpha[vowel[v]]--;
+            }
+        }
+
+        return sorted.toString();
+    }
+}
