@@ -1,0 +1,18 @@
+class Solution {
+    public int canBeTypedWords(String text, String brokenLetters) {
+        String[] textSplit = text.split(" ");
+        char[] keys = brokenLetters.toCharArray();
+        int count = textSplit.length;
+
+        for (String s : textSplit) {
+            for (char c : keys) {
+                if (s.indexOf(c) > -1) {
+                    count--;
+                    break;
+                }
+            }
+        }
+
+        return count;
+    }
+}
