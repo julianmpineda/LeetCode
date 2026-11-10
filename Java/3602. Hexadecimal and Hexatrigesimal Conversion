@@ -1,0 +1,23 @@
+class Solution {
+    public String concatHex36(int n) {
+        return hex(n*n, 16) + hex(n*n*n, 36);
+    }
+
+    private String hex(int n, int base) {
+        StringBuilder hex = new StringBuilder();
+
+        while (n > 0) {
+            int num = n % base;
+            
+            if (num < 10) {
+                hex.append(num);
+            } else {
+                hex.append((char)(num + '7'));
+            }
+
+            n /= base;
+        }
+
+        return hex.reverse().toString();
+    }
+}
