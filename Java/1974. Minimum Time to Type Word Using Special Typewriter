@@ -1,0 +1,13 @@
+class Solution {
+    public int minTimeToType(String word) {
+        int clock = Math.abs(word.charAt(0) - 'a');
+        int min = Math.min(clock, 26 - clock) + word.length();
+
+        for (int i = 1; i < word.length(); i++) {
+            clock = Math.abs(word.charAt(i) - word.charAt(i - 1));
+            min += Math.min(clock, 26 - clock);
+        }
+
+        return min;
+    }
+}
