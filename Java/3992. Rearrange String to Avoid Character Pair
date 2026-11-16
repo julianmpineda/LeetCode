@@ -1,0 +1,19 @@
+class Solution {
+    public String rearrangeString(String s, char x, char y) {
+        if (s.indexOf(x) == -1 || s.indexOf(y) == -1) {
+            return s;
+        }
+
+        StringBuilder result = new StringBuilder();
+
+        for (char c : s.toCharArray()) {
+            if (c == y) {
+                result.insert(0,c);
+            } else {
+                result.append(c);
+            }
+        }
+
+        return result.toString();
+    }
+}
