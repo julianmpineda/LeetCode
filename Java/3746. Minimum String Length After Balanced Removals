@@ -1,0 +1,11 @@
+class Solution {
+    public int minLengthAfterRemovals(String s) {
+        int[] ab = new int[2];
+
+        for (char c : s.toCharArray()) {
+            ab[c - 'a']++;
+        }
+
+        return Math.abs(ab[0] - ab[1]);
+    }
+}
